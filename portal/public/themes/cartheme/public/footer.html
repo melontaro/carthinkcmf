@@ -1,0 +1,78 @@
+<div class="met-footnav text-center">
+	<div class="container">
+		<div class="row mob-masonry">
+			<php>
+		        $navMenuModel = new \app\admin\model\NavMenuModel(); 
+		        $foot_nav_id=empty($theme_vars['foot_nav'])?2:$theme_vars['foot_nav'];
+		        $menus = $navMenuModel->navMenusTreeArray($foot_nav_id);
+		    </php>
+		    <volist name="menus" id="vo">
+		    <php>
+	            $submenus = $navMenuModel->subNavMenusTreeArray($vo['id']);
+	        </php>
+			<div class="col-md-2 col-sm-3 col-xs-6 list masonry-item">
+				<h4>
+                    <a href="{$vo['href']}"​ title="{$vo['name']}" target="{$vo['target']}">{$vo['name']}</a>
+                </h4>
+				<ul>
+					<volist name="submenus" id="subvo">
+					<li>
+						<a href="{$subvo['href']}"​ title="{$subvo['name']}" target="{$subvo['target']}">{$subvo.name}</a>
+					</li>
+					</volist>
+				</ul>
+			</div>
+			</volist>
+			<widget name="company_phone">
+			<div class="col-md-3 col-ms-12 col-xs-12 info masonry-item">
+				<em>
+					{$widget.title}：
+                </em>
+				<em>
+					<a href="tel:{$widget.vars.company_phone}"​ title="{$widget.vars.company_phone}" target='_self'>
+						{$widget.vars.company_phone}
+					</a>
+				</em>
+			</div>
+			</widget>
+		</div>
+	</div>
+</div>
+<footer>
+	<div class="container text-center">
+		<div class="powered_by_metinfo">
+			友情链接：
+			<links>
+				<a href="{$vo.url|default=''}" target="{$vo.target|default=''}">{$vo.name|default=''}</a>
+			</links>
+		</div>
+		<p>
+			&copy;{$thisyear=date('Y'); } {$theme_vars.company_name} 版权所有 
+		</p>
+		<p>
+			<notempty name="site_info.site_admin_email">
+				联系邮箱：{$site_info.site_admin_email}
+				<else/>
+			</notempty>
+			<notempty name="site_info.site_analytics">
+				{$site_info.site_analytics}
+				<else/>
+			</notempty>
+		</p>
+		<p>
+			<notempty name="site_info.site_icp">
+				<a href="http://www.miitbeian.gov.cn/" target="_blank">{$site_info.site_icp}</a>
+				<else/>
+			</notempty>
+			<notempty name="site_info.site_gwa">
+				<img src="__TMPL__/public/assets/images/ghs.png">
+				<a href="http://beian.gov.cn/" target="_blank">{$site_info.site_gwa}</a>
+				<else/>
+			</notempty>
+		</p>
+	</div>
+</footer>
+<button type="button" class="btn btn-icon btn-primary btn-squared met-scroll-top hide">
+    <i class="icon wb-chevron-up" aria-hidden="true">
+    </i>
+</button>

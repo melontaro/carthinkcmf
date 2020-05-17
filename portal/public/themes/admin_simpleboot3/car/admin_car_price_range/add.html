@@ -1,0 +1,48 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+	<ul class="nav nav-tabs">
+		<li><a href="{:url('AdminCarPriceRange/index')}">{:lang('ADMIN_PRICE_RANGE_INDEX')}</a></li>
+		<li class="active"><a href="{:url('AdminCarPriceRange/add')}">{:lang('ADMIN_PRICE_RANGE_ADD')}</a></li>
+		<!--<li><a  href="{:url('nav/edit')}" >{:lang('ADMIN_NAV_EDIT')}</a></li>-->
+	</ul>
+	<form method="post" class="form-horizontal js-ajax-form margin-top-20" action="{:url('AdminCarPriceRange/addPost')}">
+
+		<div class="form-group">
+			<label class="col-sm-2 control-label"><span class="form-required">*</span>价格最小值:</label>
+			<div class="col-sm-1 col-sm-10">
+				<input type="text" class="form-control" name="min_price" value="">
+
+
+			</div>
+			<label>万</label>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label"><span class="form-required">*</span>价格最大值:</label>
+			<div class="col-sm-1 col-sm-10">
+				<input type="text" class="form-control" name="max_price" value="">
+
+			</div>
+			<label >万</label>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">状态:</label>
+			<div class="col-md-6 col-sm-10">
+				<select name="status" class="form-control">
+					<foreach name="arrStatus" key="k" item="vo">
+						<option value="{$k}" >{$vo}</option>
+					</foreach>
+				</select>
+			</div>
+		</div>
+		<div class="col-sm-offset-2 col-sm-10">
+			<button type="submit" class="btn btn-primary js-ajax-submit">{:lang("SAVE")}</button>
+			<a class="btn btn-default" href="{:url('AdminCarPriceRange/index')}">返回</a>
+		</div>
+	</form>
+
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,718 @@
+<include file="public@header"/>
+<style type="text/css">
+    .pic-list li {
+        margin-bottom: 5px;
+    }
+</style>
+<script type="text/html" id="photos-item-tpl">
+    <li id="saved-image{id}">
+        <input id="photo-{id}" type="hidden" name="photo_urls[]" value="{filepath}">
+        <input class="form-control" id="photo-{id}-name" type="text" name="photo_names[]" value="{name}"
+               style="width: 200px;" title="图片名称">
+        <img id="photo-{id}-preview" src="{url}" style="height:36px;width: 36px;"
+             onclick="imagePreviewDialog(this.src);">
+        <a href="javascript:uploadOneImage('图片上传','#photo-{id}');">替换</a>
+        <a href="javascript:(function(){$('#saved-image{id}').remove();})();">移除</a>
+    </li>
+</script>
+<script type="text/html" id="files-item-tpl">
+    <li id="saved-file{id}">
+        <input id="file-{id}" type="hidden" name="file_urls[]" value="{filepath}">
+        <input class="form-control" id="file-{id}-name" type="text" name="file_names[]" value="{name}"
+               style="width: 200px;" title="文件名称">
+        <a id="file-{id}-preview" href="{preview_url}" target="_blank">下载</a>
+        <a href="javascript:uploadOne('文件上传','#file-{id}','file');">替换</a>
+        <a href="javascript:(function(){$('#saved-file{id}').remove();})();">移除</a>
+    </li>
+</script>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('AdminElement/index')}">车管理</a></li>
+        <li class="active"><a href="{:url('AdminElement/add')}">添加车</a></li>
+    </ul>
+    <form action="{:url('AdminElement/addPost')}" method="post" class="form-horizontal js-ajax-form margin-top-20">
+        <div class="row">
+            <div class="col-md-9">
+                <table class="table table-bordered">
+                    <tr>
+                        <th width="100">品牌<span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" style="width:400px;" required value=""
+                                   placeholder="请选择品牌" onclick="doSelectBrand();" id="js-brands-name-input"
+                                   readonly/>
+                            <input class="form-control" type="hidden" value="" name="element[brands]"
+                                   id="js-brands-id-input"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th width="100">车龄<span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" style="width:400px;" required value=""
+                                   placeholder="请选择车龄" onclick="doSelectAge();" id="js-ages-name-input"
+                                   readonly/>
+                            <input class="form-control" type="hidden" value="" name="element[ages]"
+                                   id="js-ages-id-input"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th width="100">车颜色<span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" style="width:400px;" required value=""
+                                   placeholder="请选择车颜色" onclick="doSelectColor();" id="js-colors-name-input"
+                                   readonly/>
+                            <input class="form-control" type="hidden" value="" name="element[colors]"
+                                   id="js-colors-id-input"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th width="100">车国籍<span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" style="width:400px;" required value=""
+                                   placeholder="请选择车国籍" onclick="doSelectCountry();" id="js-countrys-name-input"
+                                   readonly/>
+                            <input class="form-control" type="hidden" value="" name="element[countrys]"
+                                   id="js-countrys-id-input"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th width="100">车排量<span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" style="width:400px;" required value=""
+                                   placeholder="请选择车排量" onclick="doSelectDisplacementRange();" id="js-displacementRanges-name-input"
+                                   readonly/>
+                            <input class="form-control" type="hidden" value="" name="element[displacementRanges]"
+                                   id="js-displacementRanges-id-input"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th width="100">排放标准<span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" style="width:400px;" required value=""
+                                   placeholder="请选择排放标准" onclick="doSelectEmissionStandard();" id="js-emissionStandards-name-input"
+                                   readonly/>
+                            <input class="form-control" type="hidden" value="" name="element[emissionStandards]"
+                                   id="js-emissionStandards-id-input"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th width="100">车能源<span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" style="width:400px;" required value=""
+                                   placeholder="请选择车能源" onclick="doSelectEnergy();" id="js-energys-name-input"
+                                   readonly/>
+                            <input class="form-control" type="hidden" value="" name="element[energys]"
+                                   id="js-energys-id-input"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th width="100">车发动机<span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" style="width:400px;" required value=""
+                                   placeholder="请选择车发动机" onclick="doSelectEngine();" id="js-engines-name-input"
+                                   readonly/>
+                            <input class="form-control" type="hidden" value="" name="element[engines]"
+                                   id="js-engines-id-input"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th width="100">车变速箱<span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" style="width:400px;" required value=""
+                                   placeholder="请选择车变速箱" onclick="doSelectGearbox();" id="js-gearboxs-name-input"
+                                   readonly/>
+                            <input class="form-control" type="hidden" value="" name="element[gearboxs]"
+                                   id="js-gearboxs-id-input"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th width="100">车级别<span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" style="width:400px;" required value=""
+                                   placeholder="请选择车级别" onclick="doSelectLevel();" id="js-levels-name-input"
+                                   readonly/>
+                            <input class="form-control" type="hidden" value="" name="element[levels]"
+                                   id="js-levels-id-input"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th width="100">车亮点<span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" style="width:400px;" required value=""
+                                   placeholder="请选择车亮点" onclick="doSelectLightspot();" id="js-lightspots-name-input"
+                                   readonly/>
+                            <input class="form-control" type="hidden" value="" name="element[lightspots]"
+                                   id="js-lightspots-id-input"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th width="100">车里程<span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" style="width:400px;" required value=""
+                                   placeholder="请选择车里程" onclick="doSelectMileage();" id="js-mileages-name-input"
+                                   readonly/>
+                            <input class="form-control" type="hidden" value="" name="element[mileages]"
+                                   id="js-mileages-id-input"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th width="100">车价格范围<span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" style="width:400px;" required value=""
+                                   placeholder="请选择车价格范围" onclick="doSelectPriceRange();" id="js-priceRanges-name-input"
+                                   readonly/>
+                            <input class="form-control" type="hidden" value="" name="element[priceRanges]"
+                                   id="js-priceRanges-id-input"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th width="100">车生产方式<span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" style="width:400px;" required value=""
+                                   placeholder="请选择车生产方式" onclick="doSelectProductionType();" id="js-productionTypes-name-input"
+                                   readonly/>
+                            <input class="form-control" type="hidden" value="" name="element[productionTypes]"
+                                   id="js-productionTypes-id-input"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th width="100">车座位数<span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" style="width:400px;" required value=""
+                                   placeholder="请选择车座位数" onclick="doSelectSeat();" id="js-seats-name-input"
+                                   readonly/>
+                            <input class="form-control" type="hidden" value="" name="element[seats]"
+                                   id="js-seats-id-input"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th width="100">地区<span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" style="width:400px;" required value=""
+                                   placeholder="请选择地区" onclick="doSelectArea();" id="js-areas-name-input"
+                                   readonly/>
+                            <input class="form-control" type="hidden" value="" name="element[areas]"
+                                   id="js-areas-id-input"/>
+                        </td>
+                    </tr>
+
+
+
+
+
+
+                    <tr>
+                        <th>标题<span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="text" name="element[element_title]"
+                                   id="title" required value="" placeholder="请输入标题"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>关键词</th>
+                        <td>
+                            <input class="form-control" type="text" name="element[element_keywords]" id="keywords" value=""
+                                   placeholder="请输入关键字">
+                            <p class="help-block">多关键词之间用英文逗号隔开</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>车来源</th>
+                        <td><input class="form-control" type="text" name="element[element_source]" id="source" value=""
+                                   placeholder="请输入车来源"></td>
+                    </tr>
+                    <tr>
+                        <th>摘要</th>
+                        <td>
+                            <textarea class="form-control" name="element[element_excerpt]" style="height: 50px;"
+                                      placeholder="请填写摘要"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>内容</th>
+                        <td>
+                            <script type="text/plain" id="content" name="element[element_content]"></script>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>相册</th>
+                        <td>
+                            <ul id="photos" class="pic-list list-unstyled form-inline"></ul>
+                            <a href="javascript:uploadMultiImage('图片上传','#photos','photos-item-tpl');"
+                               class="btn btn-default btn-sm">选择图片</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>附件</th>
+                        <td>
+                            <ul id="files" class="pic-list list-unstyled form-inline">
+                            </ul>
+                            <a href="javascript:uploadMultiFile('附件上传','#files','files-item-tpl','file');"
+                               class="btn btn-sm btn-default">选择文件</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>音频</th>
+                        <td class="form-inline">
+                            <input id="file-audio" class="form-control" type="text" name="element[more][audio]"
+                                   value="{$element.more.audio|default=''}" placeholder="请上传音频文件" style="width: 200px;">
+                            <notempty name="element.more.audio">
+                                <a id="file-audio-preview" href="{:cmf_get_file_download_url($element.more.audio)}"
+                                   target="_blank">下载</a>
+                            </notempty>
+
+                            <a href="javascript:uploadOne('文件上传','#file-audio','audio');">上传</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>视频</th>
+                        <td class="form-inline">
+                            <input id="file-video" class="form-control" type="text" name="element[more][video]"
+                                   value="{$element.more.video|default=''}" placeholder="请上传视频文件" style="width: 200px;">
+                            <notempty name="element.more.video">
+                                <a id="file-video-preview" href="{:cmf_get_file_download_url($element.more.video)}"
+                                   target="_blank">下载</a>
+                            </notempty>
+                            <a href="javascript:uploadOne('文件上传','#file-video','video');">上传</a>
+                        </td>
+                    </tr>
+                </table>
+                <hook name="car_admin_element_edit_view_main"/>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('ADD')}</button>
+                        <a class="btn btn-default" href="{:url('AdminElement/index')}">{:lang('BACK')}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <table class="table table-bordered">
+                    <tr>
+                        <th><b>缩略图</b></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="text-align: center;">
+                                <input type="hidden" name="element[more][thumbnail]" id="thumbnail" value="">
+                                <a href="javascript:uploadOneImage('图片上传','#thumbnail');">
+                                    <img src="__TMPL__/public/assets/images/default-thumbnail.png"
+                                         id="thumbnail-preview"
+                                         width="135" style="cursor: pointer"/>
+                                </a>
+                                <input type="button" class="btn btn-sm btn-cancel-thumbnail" value="取消图片">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><b>发布时间</b></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input class="form-control js-bootstrap-datetime" type="text" name="element[published_time]"
+                                   value="{:date('Y-m-d H:i:s',time())}">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>车模板</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select class="form-control" name="element[more][template]" id="more-template-select">
+                                <option value="">请选择模板</option>
+                                <foreach name="element_theme_files" item="vo">
+                                    <php>$value=preg_replace('/^car\//','',$vo['file']);</php>
+                                    <option value="{$value}">{$vo.name} {$vo.file}.html</option>
+                                </foreach>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+
+                <hook name="car_admin_element_edit_view_right_sidebar"/>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="__STATIC__/js/admin.js"></script>
+<script type="text/javascript">
+    //编辑器路径定义
+    var editorURL = GV.WEB_ROOT;
+</script>
+<script type="text/javascript" src="__STATIC__/js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="__STATIC__/js/ueditor/ueditor.all.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+
+        editorcontent = new baidu.editor.ui.Editor();
+        editorcontent.render('content');
+        try {
+            editorcontent.sync();
+        } catch (err) {
+        }
+
+        $('.btn-cancel-thumbnail').click(function () {
+            $('#thumbnail-preview').attr('src', '__TMPL__/public/assets/images/default-thumbnail.png');
+            $('#thumbnail').val('');
+        });
+
+    });
+
+    function doSelectBrand() {
+        var selectedBrandsId = $('#js-brands-id-input').val();
+        openIframeLayer("{:url('AdminCarBrand/select')}?ids=" + selectedBrandsId, '请选择品牌', {
+            area: ['700px', '400px'],
+            btn: ['确定', '取消'],
+            yes: function (index, layero) {
+                //do something
+
+                var iframeWin          = window[layero.find('iframe')[0]['name']];
+                var selectedBrands = iframeWin.confirm();
+                if (selectedBrands.selectedBrandsId.length == 0) {
+                    layer.msg('请选择品牌');
+                    return;
+                }
+                console.trace(selectedBrands.selectedBrandsId.join(','));
+                $('#js-brands-id-input').val(selectedBrands.selectedBrandsId.join(','));
+                $('#js-brands-name-input').val(selectedBrands.selectedBrandsName.join(' '));
+                //console.log(layer.getFrameIndex(index));
+                layer.close(index); //如果设定了yes回调，需进行手工关闭
+            }
+        });
+    };
+
+    function doSelectAge() {
+        var selectedAgesId = $('#js-ages-id-input').val();
+        openIframeLayer("{:url('AdminCarAgeRange/select')}?ids=" + selectedAgesId, '请选择车龄', {
+            area: ['700px', '400px'],
+            btn: ['确定', '取消'],
+            yes: function (index, layero) {
+                //do something
+
+                var iframeWin          = window[layero.find('iframe')[0]['name']];
+                var selectedAges = iframeWin.confirm();
+                if (selectedAges.selectedAgesId.length == 0) {
+                    layer.msg('请选择车龄');
+                    return;
+                }
+                console.trace(selectedAges.selectedAgesId.join(','));
+                $('#js-ages-id-input').val(selectedAges.selectedAgesId.join(','));
+                $('#js-ages-name-input').val(selectedAges.selectedAgesName.join(' '));
+                //console.log(layer.getFrameIndex(index));
+                layer.close(index); //如果设定了yes回调，需进行手工关闭
+            }
+        });
+    };
+    function doSelectColor() {
+        var selectedColorsId = $('#js-colors-id-input').val();
+        openIframeLayer("{:url('AdminCarColor/select')}?ids=" + selectedColorsId, '请选择颜色', {
+            area: ['700px', '400px'],
+            btn: ['确定', '取消'],
+            yes: function (index, layero) {
+                //do something
+
+                var iframeWin          = window[layero.find('iframe')[0]['name']];
+                var selectedColors = iframeWin.confirm();
+                if (selectedColors.selectedColorsId.length == 0) {
+                    layer.msg('请选择车龄');
+                    return;
+                }
+                console.trace(selectedColors.selectedColorsId.join(','));
+                $('#js-colors-id-input').val(selectedColors.selectedColorsId.join(','));
+                $('#js-colors-name-input').val(selectedColors.selectedColorsName.join(' '));
+                //console.log(layer.getFrameIndex(index));
+                layer.close(index); //如果设定了yes回调，需进行手工关闭
+            }
+        });
+    };
+    function doSelectCountry() {
+        var selectedCountrysId = $('#js-countrys-id-input').val();
+        openIframeLayer("{:url('AdminCarCountry/select')}?ids=" + selectedCountrysId, '请选择颜色', {
+            area: ['700px', '400px'],
+            btn: ['确定', '取消'],
+            yes: function (index, layero) {
+                //do something
+
+                var iframeWin          = window[layero.find('iframe')[0]['name']];
+                var selectedCountrys = iframeWin.confirm();
+                if (selectedCountrys.selectedCountrysId.length == 0) {
+                    layer.msg('请选择车龄');
+                    return;
+                }
+                console.trace(selectedCountrys.selectedCountrysId.join(','));
+                $('#js-countrys-id-input').val(selectedCountrys.selectedCountrysId.join(','));
+                $('#js-countrys-name-input').val(selectedCountrys.selectedCountrysName.join(' '));
+                //console.log(layer.getFrameIndex(index));
+                layer.close(index); //如果设定了yes回调，需进行手工关闭
+            }
+        });
+    };
+    function doSelectDisplacementRange() {
+        var selectedDisplacementRangesId = $('#js-displacementRanges-id-input').val();
+        openIframeLayer("{:url('AdminCarDisplacementRange/select')}?ids=" + selectedDisplacementRangesId, '请选择排量', {
+            area: ['700px', '400px'],
+            btn: ['确定', '取消'],
+            yes: function (index, layero) {
+                //do something
+
+                var iframeWin          = window[layero.find('iframe')[0]['name']];
+                var selectedDisplacementRanges = iframeWin.confirm();
+                if (selectedDisplacementRanges.selectedDisplacementRangesId.length == 0) {
+                    layer.msg('请选择排量');
+                    return;
+                }
+                console.trace(selectedDisplacementRanges.selectedDisplacementRangesId.join(','));
+                $('#js-displacementRanges-id-input').val(selectedDisplacementRanges.selectedDisplacementRangesId.join(','));
+                $('#js-displacementRanges-name-input').val(selectedDisplacementRanges.selectedDisplacementRangesName.join(' '));
+                //console.log(layer.getFrameIndex(index));
+                layer.close(index); //如果设定了yes回调，需进行手工关闭
+            }
+        });
+    };
+    function doSelectEmissionStandard() {
+        var selectedEmissionStandardsId = $('#js-emissionStandards-id-input').val();
+        openIframeLayer("{:url('AdminCarEmissionStandard/select')}?ids=" + selectedEmissionStandardsId, '请选择排放标准', {
+            area: ['700px', '400px'],
+            btn: ['确定', '取消'],
+            yes: function (index, layero) {
+                //do something
+
+                var iframeWin          = window[layero.find('iframe')[0]['name']];
+                var selectedEmissionStandards = iframeWin.confirm();
+                if (selectedEmissionStandards.selectedEmissionStandardsId.length == 0) {
+                    layer.msg('请选择排放标准');
+                    return;
+                }
+                console.trace(selectedEmissionStandards.selectedEmissionStandardsId.join(','));
+                $('#js-emissionStandards-id-input').val(selectedEmissionStandards.selectedEmissionStandardsId.join(','));
+                $('#js-emissionStandards-name-input').val(selectedEmissionStandards.selectedEmissionStandardsName.join(' '));
+                //console.log(layer.getFrameIndex(index));
+                layer.close(index); //如果设定了yes回调，需进行手工关闭
+            }
+        });
+    };
+    function doSelectEnergy() {
+        var selectedEnergysId = $('#js-energys-id-input').val();
+        openIframeLayer("{:url('AdminCarEnergy/select')}?ids=" + selectedEnergysId, '请选择能源', {
+            area: ['700px', '400px'],
+            btn: ['确定', '取消'],
+            yes: function (index, layero) {
+                //do something
+
+                var iframeWin          = window[layero.find('iframe')[0]['name']];
+                var selectedEnergys = iframeWin.confirm();
+                if (selectedEnergys.selectedEnergysId.length == 0) {
+                    layer.msg('请选择能源');
+                    return;
+                }
+                console.trace(selectedEnergys.selectedEnergysId.join(','));
+                $('#js-energys-id-input').val(selectedEnergys.selectedEnergysId.join(','));
+                $('#js-energys-name-input').val(selectedEnergys.selectedEnergysName.join(' '));
+                //console.log(layer.getFrameIndex(index));
+                layer.close(index); //如果设定了yes回调，需进行手工关闭
+            }
+        });
+    };
+    function doSelectEngine() {
+        var selectedEnginesId = $('#js-engines-id-input').val();
+        openIframeLayer("{:url('AdminCarEngine/select')}?ids=" + selectedEnginesId, '请选择发动机', {
+            area: ['700px', '400px'],
+            btn: ['确定', '取消'],
+            yes: function (index, layero) {
+                //do something
+
+                var iframeWin          = window[layero.find('iframe')[0]['name']];
+                var selectedEngines = iframeWin.confirm();
+                if (selectedEngines.selectedEnginesId.length == 0) {
+                    layer.msg('请选择发动机');
+                    return;
+                }
+                console.trace(selectedEngines.selectedEnginesId.join(','));
+                $('#js-engines-id-input').val(selectedEngines.selectedEnginesId.join(','));
+                $('#js-engines-name-input').val(selectedEngines.selectedEnginesName.join(' '));
+                //console.log(layer.getFrameIndex(index));
+                layer.close(index); //如果设定了yes回调，需进行手工关闭
+            }
+        });
+    };
+    function doSelectGearbox() {
+        var selectedGearboxsId = $('#js-gearboxs-id-input').val();
+        openIframeLayer("{:url('AdminCarGearbox/select')}?ids=" + selectedGearboxsId, '请选择变速箱', {
+            area: ['700px', '400px'],
+            btn: ['确定', '取消'],
+            yes: function (index, layero) {
+                //do something
+
+                var iframeWin          = window[layero.find('iframe')[0]['name']];
+                var selectedGearboxs = iframeWin.confirm();
+                if (selectedGearboxs.selectedGearboxsId.length == 0) {
+                    layer.msg('请选择变速箱');
+                    return;
+                }
+                console.trace(selectedGearboxs.selectedGearboxsId.join(','));
+                $('#js-gearboxs-id-input').val(selectedGearboxs.selectedGearboxsId.join(','));
+                $('#js-gearboxs-name-input').val(selectedGearboxs.selectedGearboxsName.join(' '));
+                //console.log(layer.getFrameIndex(index));
+                layer.close(index); //如果设定了yes回调，需进行手工关闭
+            }
+        });
+    };
+    function doSelectLevel() {
+        var selectedLevelsId = $('#js-levels-id-input').val();
+        openIframeLayer("{:url('AdminCarLevel/select')}?ids=" + selectedLevelsId, '请选择级别', {
+            area: ['700px', '400px'],
+            btn: ['确定', '取消'],
+            yes: function (index, layero) {
+                //do something
+
+                var iframeWin          = window[layero.find('iframe')[0]['name']];
+                var selectedLevels = iframeWin.confirm();
+                if (selectedLevels.selectedLevelsId.length == 0) {
+                    layer.msg('请选择级别');
+                    return;
+                }
+                console.trace(selectedLevels.selectedLevelsId.join(','));
+                $('#js-levels-id-input').val(selectedLevels.selectedLevelsId.join(','));
+                $('#js-levels-name-input').val(selectedLevels.selectedLevelsName.join(' '));
+                //console.log(layer.getFrameIndex(index));
+                layer.close(index); //如果设定了yes回调，需进行手工关闭
+            }
+        });
+    };
+    function doSelectLightspot() {
+        var selectedLightspotsId = $('#js-lightspots-id-input').val();
+        openIframeLayer("{:url('AdminCarLightspot/select')}?ids=" + selectedLightspotsId, '请选择亮点', {
+            area: ['700px', '400px'],
+            btn: ['确定', '取消'],
+            yes: function (index, layero) {
+                //do something
+
+                var iframeWin          = window[layero.find('iframe')[0]['name']];
+                var selectedLightspots = iframeWin.confirm();
+                if (selectedLightspots.selectedLightspotsId.length == 0) {
+                    layer.msg('请选择亮点');
+                    return;
+                }
+                console.trace(selectedLightspots.selectedLightspotsId.join(','));
+                $('#js-lightspots-id-input').val(selectedLightspots.selectedLightspotsId.join(','));
+                $('#js-lightspots-name-input').val(selectedLightspots.selectedLightspotsName.join(' '));
+                //console.log(layer.getFrameIndex(index));
+                layer.close(index); //如果设定了yes回调，需进行手工关闭
+            }
+        });
+    };
+    function doSelectMileage() {
+        var selectedMileagesId = $('#js-mileages-id-input').val();
+        openIframeLayer("{:url('AdminCarMileage/select')}?ids=" + selectedMileagesId, '请选择里程', {
+            area: ['700px', '400px'],
+            btn: ['确定', '取消'],
+            yes: function (index, layero) {
+                //do something
+
+                var iframeWin          = window[layero.find('iframe')[0]['name']];
+                var selectedMileages = iframeWin.confirm();
+                if (selectedMileages.selectedMileagesId.length == 0) {
+                    layer.msg('请选择里程');
+                    return;
+                }
+                console.trace(selectedMileages.selectedMileagesId.join(','));
+                $('#js-mileages-id-input').val(selectedMileages.selectedMileagesId.join(','));
+                $('#js-mileages-name-input').val(selectedMileages.selectedMileagesName.join(' '));
+                //console.log(layer.getFrameIndex(index));
+                layer.close(index); //如果设定了yes回调，需进行手工关闭
+            }
+        });
+    };
+    function doSelectPriceRange() {
+        var selectedPriceRangesId = $('#js-priceRanges-id-input').val();
+        openIframeLayer("{:url('AdminCarPriceRange/select')}?ids=" + selectedPriceRangesId, '请选择价格范围', {
+            area: ['700px', '400px'],
+            btn: ['确定', '取消'],
+            yes: function (index, layero) {
+                //do something
+
+                var iframeWin          = window[layero.find('iframe')[0]['name']];
+                var selectedPriceRanges = iframeWin.confirm();
+                if (selectedPriceRanges.selectedPriceRangesId.length == 0) {
+                    layer.msg('请选择价格范围');
+                    return;
+                }
+                console.trace(selectedPriceRanges.selectedPriceRangesId.join(','));
+                $('#js-priceRanges-id-input').val(selectedPriceRanges.selectedPriceRangesId.join(','));
+                $('#js-priceRanges-name-input').val(selectedPriceRanges.selectedPriceRangesName.join(' '));
+                //console.log(layer.getFrameIndex(index));
+                layer.close(index); //如果设定了yes回调，需进行手工关闭
+            }
+        });
+    };
+    function doSelectProductionType() {
+        var selectedProductionTypesId = $('#js-productionTypes-id-input').val();
+        openIframeLayer("{:url('AdminCarProductionType/select')}?ids=" + selectedProductionTypesId, '请选择生产方式', {
+            area: ['700px', '400px'],
+            btn: ['确定', '取消'],
+            yes: function (index, layero) {
+                //do something
+
+                var iframeWin          = window[layero.find('iframe')[0]['name']];
+                var selectedProductionTypes = iframeWin.confirm();
+                if (selectedProductionTypes.selectedProductionTypesId.length == 0) {
+                    layer.msg('请选择生产方式');
+                    return;
+                }
+                console.trace(selectedProductionTypes.selectedProductionTypesId.join(','));
+                $('#js-productionTypes-id-input').val(selectedProductionTypes.selectedProductionTypesId.join(','));
+                $('#js-productionTypes-name-input').val(selectedProductionTypes.selectedProductionTypesName.join(' '));
+                //console.log(layer.getFrameIndex(index));
+                layer.close(index); //如果设定了yes回调，需进行手工关闭
+            }
+        });
+    };
+    function doSelectSeat() {
+        var selectedSeatsId = $('#js-seats-id-input').val();
+        openIframeLayer("{:url('AdminCarSeat/select')}?ids=" + selectedSeatsId, '请选择座位数', {
+            area: ['700px', '400px'],
+            btn: ['确定', '取消'],
+            yes: function (index, layero) {
+                //do something
+
+                var iframeWin          = window[layero.find('iframe')[0]['name']];
+                var selectedSeats = iframeWin.confirm();
+                if (selectedSeats.selectedSeatsId.length == 0) {
+                    layer.msg('请选择座位数');
+                    return;
+                }
+                console.trace(selectedSeats.selectedSeatsId.join(','));
+                $('#js-seats-id-input').val(selectedSeats.selectedSeatsId.join(','));
+                $('#js-seats-name-input').val(selectedSeats.selectedSeatsName.join(' '));
+                //console.log(layer.getFrameIndex(index));
+                layer.close(index); //如果设定了yes回调，需进行手工关闭
+            }
+        });
+    };
+    function doSelectArea() {
+        var selectedAreasId = $('#js-areas-id-input').val();
+        openIframeLayer("{:url('AdminCarArea/select')}?ids=" + selectedAreasId, '请选择地区', {
+            area: ['700px', '400px'],
+            btn: ['确定', '取消'],
+            yes: function (index, layero) {
+                //do something
+
+                var iframeWin          = window[layero.find('iframe')[0]['name']];
+                var selectedAreas = iframeWin.confirm();
+                if (selectedAreas.selectedAreasId.length == 0) {
+                    layer.msg('请选择地区');
+                    return;
+                }
+                console.trace(selectedAreas.selectedAreasId.join(','));
+                $('#js-areas-id-input').val(selectedAreas.selectedAreasId.join(','));
+                $('#js-areas-name-input').val(selectedAreas.selectedAreasName.join(' '));
+                //console.log(layer.getFrameIndex(index));
+                layer.close(index); //如果设定了yes回调，需进行手工关闭
+            }
+        });
+    }
+
+</script>
+</body>
+</html>

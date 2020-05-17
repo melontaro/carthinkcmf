@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>{$item.post_title} - {$brand.name} - {$site_info.site_name|default=''}</title>
+		<meta name="keywords" content="{$item.post_keywords},{$brand.name},{$site_info.site_seo_keywords|default=''}" />
+		<meta name="description" content="{$item.post_excerpt},{$brand.name},{$site_info.site_seo_description|default=''}">
+		<include file="public@head" />
+	</head>
+
+	<body class="met-navfixed">
+		<include file="public@nav" />
+		<div class="met-position  pattern-show">
+            <div class="container">
+                <div class="row">
+                    <ol class="breadcrumb">
+                        <li>                      
+                            <a href='/'>主页</a>
+                            >
+                            <car:breadcrumb cid="brand.id" self="true">
+								<a href="{:cmf_url('car/List/index',['id'=>$vo['id']])}">{$vo.name}</a>
+							</car:breadcrumb>
+                            > {$item.post_title}
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="page met-showcar pagetype1 animsition">
+            <div class="met-showcar-head">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class='met-showcar-list fngallery text-center ' id="met-imgs-carousel">
+                            	<present name="item.more.thumbnail">
+									<empty name="item.more.thumbnail">
+										<else/>
+										<div class='slick-slide lg-item-box' data-src="{:cmf_get_image_url($item.more.thumbnail,'')}" data-exthumbimage="{:cmf_get_image_url($item.more.thumbnail,'')}">
+		                                    <span>
+		                                        <img src="{:cmf_get_image_url($item.more.thumbnail,'')}" data-src="{:cmf_get_image_url($item.more.thumbnail,'')}" class="img-responsive" alt="{$item.post_title}" style="max-height: 400px;" />
+		                                    </span>
+		                                </div>
+									</empty>
+								</present>
+								<notempty name="item.more.photos">
+									<foreach name="item.more.photos" item="photo">
+								    	<div class='slick-slide lg-item-box' data-src="{:cmf_get_image_url($photo.url,'')}" data-exthumbimage="{:cmf_get_image_url($photo.url,'')}">
+		                                    <span>
+		                                        <img src="{:cmf_get_image_url($photo.url,'')}" data-src="{:cmf_get_image_url($photo.url,'')}" class="img-responsive" alt="{$photo.name}" style="max-height: 400px;" />
+		                                    </span>
+		                                </div>
+								    </foreach>
+								</notempty>
+                            </div>
+                        </div>
+                        <div class="col-md-5 car-intro">
+                            <h1 class='font-weight-300'>
+                            	{$item.post_title}
+                            </h1>
+                            <p class="description">
+                            	{$item.post_excerpt}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="met-showcar-body">
+                <div class="container">
+                    <div class="row no-space">
+                        <div class="col-md-9 car-content-body">
+                            <div class="row">
+                                <div class="panel car-detail">
+                                    <div class="panel-body">
+                                        <ul class="nav nav-tabs nav-tabs-line met-showcar-navtabs affix-nav">
+                                            <li class="active">
+                                                <a data-toggle="tab" href="#car-details" data-get="car-details">
+                                                	详细信息
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div class="tab-pane met-editor lazyload clearfix animation-fade active" id="car-details">
+                                                <div>
+                                                	{$item.post_content}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--右侧开始-->
+                        <div class="col-md-3">
+                            <div class="row">
+                            	<widget name="hottest_items">
+                                <div class="panel car-hot">
+                                    <div class="panel-body">
+                                        <h2 class="margin-bottom-15 font-size-16 font-weight-300">
+                                        	{$widget.title}
+                                        </h2>
+                                        <ul class="blocks-2 blocks-sm-3 mob-masonry" data-scale='1'>
+                                            <car:items limit="4" order="post.post_hits DESC" brandIds="$widget.vars.hottest_items_brand_id">
+                                            <li>
+                                                <a href="{:cmf_url('car/Item/index',array('id'=>$vo.id,'cid'=>$vo.brand_id))}" class="img" title="{$vo.post_title}">
+                                                    <present name="vo.more.thumbnail">
+														<empty name="vo.more.thumbnail">
+															<img src="__TMPL__/public/assets/images/default_tupian1.png" alt="{$vo.post_title}" style="max-width: 100%;">
+															<else/>
+															<img src="{:cmf_get_image_url($vo.more.thumbnail,'thumbnail400x300')}" alt="{$vo.post_title}" style="max-width: 100%;">
+														</empty>
+														<else/>
+														<img src="__TMPL__/public/assets/images/default_tupian1.png" alt="{$vo.post_title}" style="max-width: 100%;">
+													</present>
+                                                </a>
+                                                <a href="{:cmf_url('car/Item/index',array('id'=>$vo.id,'cid'=>$vo.brand_id))}" class="txt" title="{$vo.post_title}">
+                                                {$vo.post_title}
+                                                </a>
+                                            </li>
+                                            </car:items>
+                                        </ul>
+                                    </div>
+                                </div>
+                                </widget>
+                            </div>
+                        </div>
+                        <!--右侧结束-->
+                    </div>
+                </div>
+            </div>
+        </div>
+		<include file="public@footer" />
+		<include file="public@scripts" />
+	</body>
+
+</html>

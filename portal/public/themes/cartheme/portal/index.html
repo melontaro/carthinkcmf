@@ -1,0 +1,302 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>首页 {$site_info.site_name|default=''}</title>
+		<meta name="keywords" content="{$site_info.site_seo_keywords|default=''}" />
+		<meta name="description" content="{$site_info.site_seo_description|default=''}">
+		<include file="public@head" />
+	</head>
+
+	<body class="met-navfixed">
+		<include file="public@nav" />
+		<div class="met-banner" data-height='' style=''>
+			<php>
+				$top_slide_id=empty($theme_vars['top_slide'])?1:$theme_vars['top_slide'];
+			</php>
+			<slides id="$top_slide_id">
+				<div class="slick-slide">
+					<img class="cover-image" src="{:cmf_get_image_url($vo.image,'')}" sizes="(max-width: 767px) 767px" alt="{$vo.title|default=''}">
+				</div>
+			</slides>
+			<noslides id="$top_slide_id">
+				<div class="slick-slide">
+					<img class="cover-image" src="__TMPL__/public/assets/images/demo/1.jpg" sizes="(max-width: 767px) 767px" alt="此幻灯片只是演示,您没有设置任何幻灯片,请到后台模板设置！">
+				</div>
+				<div class="slick-slide">
+					<img class="cover-image" src="__TMPL__/public/assets/images/demo/2.jpg" sizes="(max-width: 767px) 767px" alt="此幻灯片只是演示,您没有设置任何幻灯片,请到后台模板设置！">
+				</div>
+			</noslides>
+		</div>
+		<widget name="hot_car">
+			<div class="met-index-hot met-index-body" id="hot">
+				<div class="title">
+					<h2 class="">{$widget.title|default=''}</h2>
+					<div class="home-line"></div>
+					<p class="desc">
+						{$widget.vars.hot_car_sub_title|default=''}
+					</p>
+				</div>
+				<div class="container">
+					<ul class="blocks-100 blocks-sm-2 blocks-md-4 blocks-xlg-4 " data-scale=''>
+						<php>
+							$widget["vars"]["hot_car_brand_id"] = empty($widget["vars"]["hot_car_brand_id"])?1:$widget["vars"]["hot_car_brand_id"]; $more_brand_id=explode(",",$widget["vars"]["hot_car_brand_id"]);
+						</php>
+						<car:elements limit="4" order="element.element_hits DESC" brandIds="$widget.vars.hot_car_brand_id">
+							<li class="">
+								<div class="widget widget-article widget-shadow">
+									<div class="widget-header cover overlay overlay-hover">
+										<present name="vo.more.thumbnail">
+											<empty name="vo.more.thumbnail">
+												<img src="__TMPL__/public/assets/images/default_tupian1.png" class="cover-image overlay-scale" alt="{$vo.element_title}">
+												<else/>
+												<img src="{:cmf_get_image_url($vo.more.thumbnail,'thumbnail400x300')}" class="cover-image overlay-scale" alt="{$vo.element_title}">
+											</empty>
+											<else/>
+											<img src="__TMPL__/public/assets/images/default_tupian1.png" class="cover-image overlay-scale" alt="{$vo.element_title}">
+										</present>
+									</div>
+									<div class="widget-body">
+										<h3 class="widget-title">
+	                                    {$vo.element_title}
+	                                </h3>
+										<p class="des">
+											{$vo.element_excerpt|mb_substr=0,60}...
+										</p>
+										<div class="widget-body-footer">
+											<a class="btn btn-info waves-effect waves-light" href="{:cmf_url('car/Item/index',array('id'=>$vo.id,'cid'=>$vo.brand_id))}">
+												查看详情
+											</a>
+											<div class="widget-actions pull-right">
+												<a href="#" ​>
+													关注人数：{$vo.element_hits}
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+						</car:elements>
+					</ul>
+					<div class="hot-btns">
+						<a href="{:cmf_url('car/List/index',array('id'=>$more_brand_id[0]))}" ​>
+							查看更多
+						</a>
+					</div>
+				</div>
+			</div>
+		</widget>
+		<div class="met-index-imgnews met-index-body" id="news">
+			<widget name="last_news">
+				<php>
+					$last_news_category_id = empty($widget["vars"]["last_news_category_id"])?1:$widget["vars"]["last_news_category_id"]; $last_news_category_id2 = empty($widget["vars"]["last_news_category_id"])?1:$widget["vars"]["last_news_category_id2"]; $more_category_id2=explode(",",$last_news_category_id); $more_category_id3=explode(",",$last_news_category_id2);
+				</php>
+				<div class="title">
+					<h2 class="">
+					{$widget.title}
+                </h2>
+					<div class="home-line"></div>
+					<p class="desc"></p>
+				</div>
+				<div class="container">
+					<div class="clearfix" data-plugin="matchHeight">
+						<div class="col-md-7 col-xs-12 left-news">
+							<div class="sec-title">
+								<h3>
+                                {$widget["vars"]["last_news_brand_name"]}
+                            </h3>
+								<span class="line">
+                            </span>
+								<a href="{:cmf_url('portal/List/index',array('id'=>$more_category_id2[0]))}" ​title="{$widget.vars.last_news_brand_name}">
+									更多
+								</a>
+							</div>
+							<div class="slick" id="imgnews-slick">
+								<portal:articles limit="5" order="post.published_time DESC" brandIds="$widget.vars.last_news_category_id">
+									<div>
+										<a href="{:cmf_url('portal/Article/index',array('id'=>$vo.id,'cid'=>$vo.category_id))}" title="{$vo.post_title}" target='_self'>
+											<div class="text">
+												<span class="icon">
+                                            <img src="__TMPL__/public/assets/images/icon-search.png" alt="">
+                                        </span>
+												<h3>
+                                            <span>
+                                                0{$key+1}
+                                            </span>
+                                            {$vo.post_title}
+                                        </h3>
+												<p class="des">
+													{$vo.post_excerpt|mb_substr=0,50}...
+												</p>
+											</div>
+											<present name="vo.more.thumbnail">
+												<empty name="vo.more.thumbnail">
+													<img class="cover-image" src="__TMPL__/public/assets/images/default_tupian1.png" sizes="(max-width: 991px) 991px" alt="{$vo.post_title}">
+													<else/>
+													<img class="cover-image" src="{:cmf_get_image_url($vo.more.thumbnail,'thumbnail800x343')}" sizes="(max-width: 991px) 991px" alt="{$vo.post_title}">
+												</empty>
+												<else/>
+												<img class="cover-image" src="__TMPL__/public/assets/images/default_tupian1.png" sizes="(max-width: 991px) 991px" alt="{$vo.post_title}">
+											</present>
+										</a>
+									</div>
+								</portal:articles>
+							</div>
+						</div>
+						<div class="col-md-5 col-xs-12 right-news news-ul">
+							<div class="sec-title">
+								<h3>
+								{$widget["vars"]["last_news_category_name2"]}
+                            </h3>
+								<span class="line">
+                            </span>
+								<a href="{:cmf_url('portal/List/index',array('id'=>$more_category_id3[0]))}" ​title="{$widget.vars.last_news_category_name2}">
+									更多
+								</a>
+							</div>
+							<portal:articles limit="9" order="post.published_time DESC" brandIds="$widget.vars.last_news_category_id2">
+								<li class="">
+									<span class="badge badge-radius badge-default color">
+	                                {$key+1}
+	                            </span>
+									<a href="{:cmf_url('portal/Article/index',array('id'=>$vo.id,'cid'=>$vo.category_id))}" title="{$vo.post_title}" target='_self'>
+										{$vo.post_title}
+									</a>
+									<span>
+	                                [{:date('m-d',$vo.published_time)}]
+	                            </span>
+								</li>
+							</portal:articles>
+						</div>
+					</div>
+				</div>
+			</widget>
+			<widget name="index_ad1">
+				<div class="container">
+					<div class="news-bg">
+						<div class="bg" style="background:url({:cmf_get_image_url($widget.vars.index_ad1_img,'')}) center no-repeat;">
+							<div class="text">
+								<h3>{$widget.title}</h3>
+								<p>
+									{$widget.vars.index_ad1_txt}
+								</p>
+								<img src="{:cmf_get_image_url($widget.vars.index_ad1_code,'')}" alt="{$widget.title}">
+							</div>
+						</div>
+					</div>
+				</div>
+			</widget>
+		</div>
+		<widget name="last_car">
+		<div class="met-index-car met-index-body" id='car'>
+			<div class="title">
+				<h2 class="">
+					{$widget.title}
+                </h2>
+				<div class="home-line"></div>
+				<p class="desc "></p>
+			</div>
+			<div class="container">
+				<div class=''>
+					<ul class="nav nav-tabs">
+						<car:subCategories brandId="$widget.vars.last_car_brand_id" item="vo">
+						    <li>
+								<a href="{:cmf_url('portal/List/index',array('id'=>$vo.id))}" title="{$vo.name}">
+									<h3>
+	                                    {$vo.name}
+	                                </h3>
+								</a>
+							</li>
+						</car:subCategories>
+					</ul>
+				</div>
+				<ul class="blocks-2 blocks-sm-2 blocks-md-4 blocks-xlg-4 no-space" id="indexprolist" data-scale='0.75117370892019'>
+					<php>
+						$widget["vars"]["last_car_brand_id"] = empty($widget["vars"]["last_car_brand_id"])?1:$widget["vars"]["last_car_brand_id"];
+						$more_car_brand_id=explode(",",$widget["vars"]["last_car_brand_id"]);
+					</php>
+					<car:elements limit="8" order="element.element_hits DESC" brandIds="$widget.vars.last_car_brand_id">
+					<li>
+						<div class="widget">
+							<figure class="widget-header cover">
+								<a href="{:cmf_url('car/Item/index',array('id'=>$vo.id,'cid'=>$vo.brand_id))}" title="{$vo.element_title}" target='_self'>
+									<present name="vo.more.thumbnail">
+										<empty name="vo.more.thumbnail">
+											<img class="cover-image" src="__TMPL__/public/assets/images/default_tupian1.png" style='height:300px;' alt="{$vo.element_title}">
+											<else/>
+											<img class="cover-image" src="{:cmf_get_image_url($vo.more.thumbnail,'thumbnail400x300')}" style='height:300px;' alt="{$vo.element_title}">
+										</empty>
+										<else/>
+										<img class="cover-image" src="__TMPL__/public/assets/images/default_tupian1.png" style='height:300px;' alt="{$vo.element_title}">
+									</present>
+								</a>
+							</figure>
+							<h4 class="widget-title">
+                                <a href="{:cmf_url('car/Item/index',array('id'=>$vo.id,'cid'=>$vo.brand_id))}" title="{$vo.element_title}" target='_self'>
+                                	{$vo.element_title}
+                                    <span>
+                                        <i class="fa fa-eye">
+                                        </i>
+                                        {$vo.element_hits}人浏览
+                                    </span>
+                                </a>
+                            </h4>
+						</div>
+					</li>
+					</car:elements>
+				</ul>
+			</div>
+		</div>
+		</widget>
+		<widget name="nursery_car">
+		<div class="met-index-about met-index-body" id="about">
+			<div class="title">
+				<h2 class="">
+					{$widget.title}
+                </h2>
+				<div class="home-line">
+				</div>
+				<p class="desc">
+				</p>
+			</div>
+			<div class="container">
+				<div class="about-list">
+					<php>
+						$widget["vars"]["nursery_car_brand_id"] = empty($widget["vars"]["nursery_car_brand_id"])?1:$widget["vars"]["nursery_car_brand_id"];
+					</php>
+					<car:elements limit="8" order="element.element_hits DESC" brandIds="$widget.vars.nursery_car_brand_id">
+					<div>
+						<div class="col-md-6 img">
+							<present name="vo.more.thumbnail">
+								<empty name="vo.more.thumbnail">
+									<img src="__TMPL__/public/assets/images/default_tupian1.png" alt="{$vo.element_title}">
+									<else/>
+									<img src="{:cmf_get_image_url($vo.more.thumbnail,'thumbnail800x343')}" alt="{$vo.element_title}">
+								</empty>
+								<else/>
+								<img src="__TMPL__/public/assets/images/default_tupian1.png" alt="{$vo.element_title}">
+							</present>
+						</div>
+						<div class="col-md-6 text">
+							<h3>{$vo.element_title}
+                                <span>
+                                    / 0{$key+1}
+                                </span>
+                            </h3>
+							<p>
+								{$vo.element_excerpt|mb_substr=0,150}...
+							</p>
+							<a href="{:cmf_url('car/Item/index',array('id'=>$vo.id,'cid'=>$vo.brand_id))}" title="{$vo.element_title}" target='_self' class="btn btn-info waves-effect waves-light">
+								查看更多
+							</a>
+						</div>
+					</div>
+					</car:elements>
+				</div>
+			</div>
+		</div>
+		</widget>
+		<include file="public@footer" />
+		<include file="public@scripts" />
+</html>

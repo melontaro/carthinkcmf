@@ -1,0 +1,33 @@
+{
+    "name": "产品页",
+    "action": "car/Item/index",
+    "description": "产品页模板文件",
+    "order": 10.0,
+    "more": {
+        "vars": {
+
+        },
+        "widgets":{
+            "hottest_items": {
+                "title": "热门推荐",
+                "display": "1",
+                "vars": {
+                    "hottest_items_brand_id": {
+                        "title": "产品分类ID",
+                        "value": "",
+                        "type": "text",
+                        "dataSource": {
+                            "api": "car/brand/index",
+                            "multi": true
+                        },
+                        "placeholder": "请选择分类",
+                        "tip": "",
+                        "rule": {
+                            "require": true
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

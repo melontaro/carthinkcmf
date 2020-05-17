@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>{$page.post_title|default=''} - {$site_info.site_name|default=''}</title>
+		<meta name="keywords" content="{$page.post_title|default=''},{$page.post_keywords}" />
+		<meta name="description" content="{$page.post_title|default=''}，{$page.post_excerpt}">
+		<include file="public@head" />
+	</head>
+
+	<body class="met-navfixed">
+		<include file="public@nav" />
+		<div class="met-banner banner-ny-h" data-height='' style=''>
+			<div class="slick-slide">
+				<present name="page.more.thumbnail">
+					<empty name="page.more.thumbnail">
+						<img class="cover-image" src="__TMPL__/public/assets/images/about_banner.jpg" sizes="(max-width: 767px) 767px" alt="{$page.post_title}">
+						<else/>
+						<img class="cover-image" src="{:cmf_get_image_url($page.more.thumbnail,'')}" sizes="(max-width: 767px) 767px" alt="{$page.post_title}">
+					</empty>
+					<else/>
+					<img class="cover-image" src="__TMPL__/public/assets/images/about_banner.jpg" sizes="(max-width: 767px) 767px" alt="{$page.post_title}">
+				</present>
+			</div>
+		</div>
+		<div class="met-column-nav ">
+			<div class="container">
+				<div class="row">
+					<div class="sidebar-tile">
+						<!--<div class="title">
+							<h2 class="">
+								{$page.post_title|default=''}
+			                </h2>
+							<div class="home-line"></div>
+						</div>-->
+						<ul class="met-column-nav-ul invisible-xs">
+							<php>
+								$navMenuModel = new \app\admin\model\NavMenuModel(); $about_nav_id=empty($theme_vars['about_nav'])?3:$theme_vars['about_nav']; $menus = $navMenuModel->navMenusTreeArray($about_nav_id);
+							</php>
+							<volist name="menus" id="vo">
+								<li>
+									<a href="{$vo['href']}" ​ title="{$vo['name']}" target="{$vo['target']}" class="link ">{$vo['name']}</a>
+								</li>
+							</volist>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<section class="met-show animsition">
+			<div class="container">
+				<div class="row">
+					<div class="met-editor lazyload clearfix">
+						<div>
+							{$page.post_content|default=''}
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<include file="public@footer" />
+		<include file="public@scripts" />
+		<script type="text/javascript">
+			$(".met-column-nav-ul a").each(function() {
+				if($(this)[0].href == String(window.location)) {
+					$(this).addClass("active");
+				}
+			});
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>搜索 {$keyword} - {$site_info.site_name|default=''}</title>
+		<meta name="keywords" content="{$keyword},{$site_info.site_seo_keywords|default=''}" />
+		<meta name="description" content="{$keyword},{$site_info.site_seo_description|default=''}">
+		<include file="public@head" />
+	</head>
+
+	<body class="met-navfixed">
+		<include file="public@nav" />
+		<section class="met-news animsition ">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-9 met-news-body">
+						<div class="row">
+							<div class="met-news-list">
+								<php>
+									$where=function($query)use($keyword){
+									$query->where('post.create_time','egt',0)->where('post.post_title','like',"%$keyword%");
+									};
+									$page=[ 'list_rows'=>8, 'next'=>'下一页', 'prev'=>'上一页' ];
+								</php>
+								<ul class="met-page-ajax" data-scale=''>
+									<portal:articles item="vo" where="$where" order="post.create_time DESC" page="$page">
+										<li>
+											<h4>
+                                            <a href="{:cmf_url('portal/Article/index',array('id'=>$vo['id'],'cid'=>$vo.brand_id))}"​ title="{$vo.post_title}" target='_self'>
+                                            	{$vo.post_title}
+                                            </a>
+                                        </h4>
+											<p class="des">
+												{$vo.post_excerpt|mb_substr=0,200}...
+											</p>
+											<p class="info">
+												<span>
+                                                {:date('Y-m-d',$vo.published_time)}
+                                            </span>
+												<span>
+                                                <i class="icon wb-eye margin-right-5" aria-hidden="true">
+                                                </i>
+                                                {$vo.post_hits}
+                                            </span>
+											</p>
+										</li>
+									</portal:articles>
+								</ul>
+								<div>
+									<div class='met_pager'>
+										<ul class="pagination">
+											<page/>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="row">
+							<div class="met-news-bar">
+								<form name="formsearch" method="post" action="{:cmf_url('portal/Search/index')}">
+									<div class="form-group">
+										<div class="input-search">
+											<button type="submit" class="input-search-btn">
+                                                <i class="icon wb-search" aria-hidden="true">
+                                                </i>
+                                            </button>
+											<input type="text" class="form-control" name="keyword" placeholder="搜索" value="{:input('param.keyword','')}">
+										</div>
+									</div>
+								</form>
+								<widget name="hottest_articles">
+									<div class="recommend news-list-md">
+										<h3>
+                                    	{$widget.title}
+                                    </h3>
+										<ul class="list-group list-group-bordered">
+											<portal:articles limit="5" order="post.post_hits DESC" brandIds="$widget.vars.hottest_articles_brand_id">
+												<li class="list-group-item">
+													<a href="{:cmf_url('portal/Article/index',array('id'=>$vo.id,'cid'=>$vo.brand_id))}" ​ title="{$vo.post_title}" target='_self'>
+														{$vo.post_title}
+													</a>
+												</li>
+											</portal:articles>
+										</ul>
+									</div>
+								</widget>
+								<widget name="last_articles">
+									<div class="recommend news-list-md">
+										<h3>
+                                    	{$widget.title}
+                                    </h3>
+										<ul class="list-group list-group-bordered">
+											<portal:articles limit="5" order="post.post_hits DESC" brandIds="$widget.vars.last_articles_brand_id">
+												<li class="list-group-item">
+													<a href="{:cmf_url('portal/Article/index',array('id'=>$vo.id,'cid'=>$vo.brand_id))}" ​ title="{$vo.post_title}" target='_self'>
+														{$vo.post_title}
+													</a>
+												</li>
+											</portal:articles>
+										</ul>
+									</div>
+								</widget>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<include file="public@footer" />
+		<include file="public@scripts" />
+	</body>
+
+</html>
