@@ -236,6 +236,11 @@ class CarElementModel extends Model
         if (is_string($brands)) {
             $brands = explode(',', $brands);
         }
+        $lightspots=$data['lightspots'];
+        if (is_string($lightspots)) {
+            $lightspots = explode(',', $lightspots);//将字符串打散为数组
+        }
+
         $areas= $data['areas'];
         if (is_string($areas)) {
             $areas = explode(',', $areas);//将字符串打散为数组
@@ -250,7 +255,7 @@ class CarElementModel extends Model
         $this->engines()->save($data['engines']);
         $this->gearboxs()->save($data['gearboxs']);
         $this->levels()->save($data['levels']);
-        $this->lightspots()->save($data['lightspots']);
+        $this->lightspots()->save($lightspots);
         $this->mileages()->save($data['mileages']);
         $this->priceRanges()->save($data['priceRanges']);
         $this->productionTypes()->save($data['productionTypes']);

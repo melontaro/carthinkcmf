@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{$element.element_title}</title>
+    <meta name="keywords" content="{$site_info.site_seo_keywords|default=''}"/>
+    <meta name="description" content="{$site_info.site_seo_description|default=''}">
+    <include file="public@head"/>
+    <style>
+        #element_content img {
+            height: auto !important;
+            max-width: 100%;
+        }
+
+        #element_content {
+            word-wrap: break-word;
+        }
+    </style>
+    <hook name="before_head_end"/>
+</head>
+<body class="body-white">
+<include file="public@nav"/>
+<div class="container tc-main">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="tc-box element-box">
+                <h2>{$element.element_title}</h2>
+                <div class="element-infobox">
+                    <span>{:date('Y-m-d H:i',$element.published_time)} by {$element.user.user_nickname}</span>
+                    <span>
+		    			<a href="javascript:;"><i class="fa fa-eye"></i><span>{$element.element_hits}</span></a>
+						<a href="{:url('car/Element/doLike',array('id'=>$element['id']))}" class="js-count-btn"><i
+                                class="fa fa-thumbs-up"></i><span class="count">{$element.element_like}</span></a>
+						<a href="{:url('user/favorite/add')}"
+                           class="js-favorite-btn"
+                           data-title="{:base64_encode($element.element_title)}"
+                           data-url="{:cmf_url_encode('car/Element/index',array('id'=>$element['id']))}"
+                           data-table="car_element"
+                           data-id="{$element['id']}"
+                        >
+							<i class="fa fa-star-o"></i>
+						</a>
+					</span>
+                </div>
+                <hr>
+                <php>
+                    $before_content_hook_param=[
+                    'object_id'=>$element['id'],
+                    'table_name'=>'car_element',
+                    'object_title'=>$element['element_title'],
+                    'user_id'=>$element['user_id'],
+                    'url'=>cmf_url_encode('car/Element/index',array('id'=>$element['id'],'cid'=>$brands['id'])),
+                    'object'=>$element
+                    ];
+                </php>
+                <hook name="before_content" param="before_content_hook_param"/>
+
+                <div id="element_content">
+                    {$element.element_content}
+                </div>
+                <if condition="!empty($element['element_source'])">
+                    <div>
+                        <b>注：本文转载自{$element.element_source}，转载目的在于传递更多信息，并不代表本网赞同其观点和对其真实性负责。如有侵权行为，请联系我们，我们会及时删除。</b>
+                    </div>
+                </if>
+
+                <php>
+                    $after_content_hook_param=[
+                    'object_id'=>$element['id'],
+                    'table_name'=>'car_element',
+                    'object_title'=>$element['element_title'],
+                    'user_id'=>$element['user_id'],
+                    'url'=>cmf_url_encode('car/Element/index',array('id'=>$element['id'],'cid'=>$brands['id'])),
+                    'object'=>$element
+                    ];
+                </php>
+                <hook name="after_content" param="after_content_hook_param"/>
+
+                <php>
+                    $comment_hook_param=[
+                    'object_id'=>$element['id'],
+                    'table_name'=>'car_element',
+                    'object_title'=>$element['element_title'],
+                    'url'=>cmf_url_encode('car/Element/index',array('id'=>$element['id'],'cid'=>$brands['id'])),
+                    'user_id'=>$element['user_id'],
+                    ];
+                    $comment=hook_one('comment',$comment_hook_param);
+                </php>
+
+                <if condition="empty($comment) && cmf_get_current_admin_id()">
+                    <div style="border: 1px dashed #ddd;min-height: 200px;padding-top: 50px;">
+                        <div class="alert alert-warning" role="alert">
+                            此区域这为评论区，请安装评论插件！<br>
+                            <em>注：普通用户不会看到此提示！</em>
+                        </div>
+                    </div>
+                </if>
+                {$comment}
+            </div>
+
+
+        </div>
+        <div class="col-md-3">
+            <div class="tc-box first-box">
+                <div class="headtitle">
+                    <h2>热门车</h2>
+                </div>
+                <div class="ranking">
+                    <php>
+                        $hot_elements=[];
+                    </php>
+                    <ul class="list-unstyled">
+                        <car:elements limit="5" order="element.element_hits DESC">
+                            <php>$top=$key<3?"top3":"";</php>
+                            <li class="{$top}">
+                                <i>{$key+1}</i>
+                                <a title="{$vo.element_title}"
+                                   href="{:url('car/element/index',array('id'=>$vo['id']))}">
+                                    {$vo.element_title}
+                                </a>
+                            </li>
+                        </car:elements>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <include file="public@footer"/>
+</div>
+
+<include file="public@scripts"/>
+<hook name="before_body_end"/>
+</body>
+</html>

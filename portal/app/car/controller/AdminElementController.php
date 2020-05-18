@@ -194,8 +194,54 @@ class AdminElementController extends AdminBaseController
 
         $carElementModel = new CarElementModel();
         $element            = $carElementModel->where('id', $id)->find();
-        $elementbrands  = $element->brands()->alias('a')->column('a.name', 'a.id');
-        $elementBrandIds = implode(',', array_keys($elementbrands));
+
+        $elementbrands  = $element->brands()->alias('a')->column('a.name', 'a.id');//数组
+        $elementBrandIds = implode(',', array_keys($elementbrands));//把数组元素组合为字符串
+
+        $elementages  = $element->ages()->alias('a')->column('*', 'a.id');
+        $elementAgeIds = implode(',', array_keys($elementages));
+
+        $elementareas  = $element->areas()->alias('a')->column('a.name', 'a.id');
+        $elementAreaIds = implode(',', array_keys($elementareas));
+
+        $elementcolors  = $element->colors()->alias('a')->column('a.name', 'a.id');
+        $elementColorIds = implode(',', array_keys($elementcolors));
+
+        $elementcountrys  = $element->countrys()->alias('a')->column('a.name', 'a.id');
+        $elementCountryIds = implode(',', array_keys($elementcountrys));
+
+        $elementdisplacementranges  = $element->displacementRanges()->alias('a')->column('a.min_displacement','a.max_displacement', 'a.id');
+        $elementDisplacementRangeIds = implode(',', array_keys($elementdisplacementranges));
+
+        $elementemissionstandards  = $element->emissionStandards()->alias('a')->column('a.name', 'a.id');
+        $elementEmissionStandardIds = implode(',', array_keys($elementemissionstandards));
+
+        $elementenergys  = $element->energys()->alias('a')->column('a.name', 'a.id');
+        $elementEnergyIds = implode(',', array_keys($elementenergys));
+
+        $elementengine  = $element->engines()->alias('a')->column('a.name', 'a.id');
+        $elementEngineIds = implode(',', array_keys($elementengine));
+
+        $elementgearboxs  = $element->gearboxs()->alias('a')->column('a.name', 'a.id');
+        $elementGearboxIds = implode(',', array_keys($elementgearboxs));
+
+        $elementlevels  = $element->levels()->alias('a')->column('a.name', 'a.id');
+        $elementLevelIds = implode(',', array_keys($elementlevels));
+
+        $elementlightspots  = $element->lightspots()->alias('a')->column('a.name', 'a.id');
+        $elementLightspotIds = implode(',', array_keys($elementlightspots));
+
+        $elementmileages  = $element->mileages()->alias('a')->column('a.num', 'a.id');
+        $elementMileageIds = implode(',', array_keys($elementmileages));
+
+        $elementpriceranges  = $element->priceRanges()->alias('a')->column('a.min_price', 'a.max_price','a.id');
+        $elementPriceRangeIds = implode(',', array_keys($elementpriceranges));
+
+        $elementproductiontypes  = $element->productionTypes()->alias('a')->column('a.name','a.id');
+        $elementProductionTypeIds = implode(',', array_keys($elementproductiontypes));
+
+        $elementseats  = $element->seats()->alias('a')->column('a.num','a.id');
+        $elementSeatIds = implode(',', array_keys($elementseats));
 
         $themeModel        = new ThemeModel();
         $elementThemeFiles = $themeModel->getActionThemeFiles('car/Element/index');
@@ -203,6 +249,36 @@ class AdminElementController extends AdminBaseController
         $this->assign('element', $element);
         $this->assign('element_brands', $elementbrands);
         $this->assign('element_brand_ids', $elementBrandIds);
+        $this->assign('element_ages', $elementages);
+        $this->assign('element_age_ids', $elementAgeIds);
+        $this->assign('element_areas', $elementareas);
+        $this->assign('element_area_ids', $elementAreaIds);
+        $this->assign('element_colors', $elementcolors);
+        $this->assign('element_color_ids', $elementColorIds);
+        $this->assign('element_countrys', $elementcountrys);
+        $this->assign('element_country_ids', $elementCountryIds);
+        $this->assign('element_displacementranges', $elementdisplacementranges);
+        $this->assign('element_displacementrange_ids', $elementDisplacementRangeIds);
+        $this->assign('element_emissionstandards', $elementemissionstandards);
+        $this->assign('element_emissionstandard_ids', $elementEmissionStandardIds);
+        $this->assign('element_energys', $elementenergys);
+        $this->assign('element_energy_ids', $elementEnergyIds);
+        $this->assign('element_engines', $elementengine);
+        $this->assign('element_engine_ids', $elementEngineIds);
+        $this->assign('element_gearboxs', $elementgearboxs);
+        $this->assign('element_gearbox_ids', $elementGearboxIds);
+        $this->assign('element_levels', $elementlevels);
+        $this->assign('element_level_ids', $elementLevelIds);
+        $this->assign('element_lightspots', $elementlightspots);
+        $this->assign('element_lightspot_ids', $elementLightspotIds);
+        $this->assign('element_mileages', $elementmileages);
+        $this->assign('element_mileage_ids', $elementMileageIds);
+        $this->assign('element_priceranges', $elementpriceranges);
+        $this->assign('element_pricerange_ids', $elementPriceRangeIds);
+        $this->assign('element_productiontypes', $elementproductiontypes);
+        $this->assign('element_productiontype_ids', $elementProductionTypeIds);
+        $this->assign('element_seats', $elementseats);
+        $this->assign('element_seat_ids', $elementSeatIds);
 
         return $this->fetch();
     }

@@ -1,0 +1,17 @@
+{
+    "name": "车页",
+    "action": "car/Element/index",
+    "description": "车页模板文件",
+    "order": 10.0,
+    "more": {
+        "vars": {
+            "hot_elements_brand_id": {
+                "title": "Hot Elements品牌ID",
+                "value": "1",
+                "type": "text",
+                "tip": "",
+                "rule": []
+            }
+        }
+    }
+}

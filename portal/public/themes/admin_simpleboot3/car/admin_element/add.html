@@ -428,7 +428,7 @@
     };
     function doSelectCountry() {
         var selectedCountrysId = $('#js-countrys-id-input').val();
-        openIframeLayer("{:url('AdminCarCountry/select')}?ids=" + selectedCountrysId, '请选择颜色', {
+        openIframeLayer("{:url('AdminCarCountry/select')}?ids=" + selectedCountrysId, '请选择国籍', {
             area: ['700px', '400px'],
             btn: ['确定', '取消'],
             yes: function (index, layero) {
@@ -437,7 +437,7 @@
                 var iframeWin          = window[layero.find('iframe')[0]['name']];
                 var selectedCountrys = iframeWin.confirm();
                 if (selectedCountrys.selectedCountrysId.length == 0) {
-                    layer.msg('请选择车龄');
+                    layer.msg('请选择国籍');
                     return;
                 }
                 console.trace(selectedCountrys.selectedCountrysId.join(','));

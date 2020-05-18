@@ -1,0 +1,50 @@
+{
+    "name": "单页面",
+    "action": "car/Page/index",
+    "description": "单页面模板文件",
+    "order": 10.0,
+    "more": {
+        "widgets":{
+            "hottest_elements": {
+                "title": "热门车",
+                "display": "1",
+                "vars": {
+                    "hottest_elements_brand_id": {
+                        "title": "车品牌ID",
+                        "value": "",
+                        "type": "text",
+                        "dataSource": {
+                            "api": "car/brand/index",
+                            "multi": true
+                        },
+                        "placeholder": "请选择品牌",
+                        "tip": "",
+                        "rule": {
+                            "require": true
+                        }
+                    }
+                }
+            },
+            "last_elements": {
+                "title": "最新发布",
+                "display": "1",
+                "vars": {
+                    "last_elements_brand_id": {
+                        "title": "车品牌ID",
+                        "value": "",
+                        "type": "text",
+                        "dataSource": {
+                            "api": "car/brand/index",
+                            "multi": true
+                        },
+                        "placeholder": "请选择品牌",
+                        "tip": "",
+                        "rule": {
+                            "require": true
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

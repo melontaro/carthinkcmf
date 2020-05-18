@@ -12,8 +12,7 @@
                     </label>
                 </th>
                 <th width="50">ID</th>
-                <th>品牌名称</th>
-                <th>品牌描述</th>
+                <th>车龄范围</th>
             </tr>
             </thead>
             <tbody>
@@ -25,8 +24,8 @@
                                value="{$vo.id}" data-name="{$vo.min_age}-{$vo.max_age}年" {$checked}>
                     </td>
                     <td>{$vo.id}</td>
-                    <td>{$vo.min_age}</td>
-                    <td>{$vo.max_age}</td>
+                    <td>{$vo.min_age}-{$vo.max_age}年</td>
+
                 </tr>
             </foreach>
             </tbody>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{$page.element_title}</title>
+    <meta name="keywords" content="{$page.element_keywords}"/>
+    <meta name="description" content="{$page.element_excerpt}">
+    <include file="public@head"/>
+    <style>
+        #element_content img {
+            height: auto !important;
+            max-width: 100%;
+        }
+    </style>
+    <hook name="before_head_end"/>
+</head>
+<body class="body-white">
+<include file="public@nav"/>
+<div class="container tc-main">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="tc-box element-box">
+                <h2>{$page.element_title|default=''}</h2>
+                <hr>
+                <div id="element_content">
+                    {$page.element_content|default=''}
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-3">
+            <widget name="hottest_elements">
+                <div class="tc-box">
+                    <div class="headtitle">
+                        <h2>{$widget.title}</h2>
+                    </div>
+                    <div class="ranking">
+                        <php>
+                            $hot_elements=[];
+                        </php>
+                        <ul class="list-unstyled">
+                            <car:elements limit="5" order="element.element_hits DESC"
+                                             brandIds="$widget.vars.hottest_elements_brand_id">
+                                <php>$top=$key<3?"top3":"";</php>
+                                <li class="{$top}">
+                                    <i>{$key+1}</i>
+                                    <a title="{$vo.element_title}"
+                                       href="{:cmf_url('car/Element/index',array('id'=>$vo['id']))}">
+                                        {$vo.element_title}
+                                    </a>
+                                </li>
+                            </car:elements>
+                        </ul>
+                    </div>
+                </div>
+            </widget>
+
+
+            <widget name="last_elements">
+                <div class="tc-box">
+                    <div class="headtitle">
+                        <h2>{$widget.title}</h2>
+                    </div>
+                    <div class="elements">
+                        <car:elements limit="5" order="element.published_time DESC"
+                                         brandIds="$widget.vars.last_elements_brand_id">
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    <a class="img-wraper"
+                                       href="{:cmf_url('car/Element/index',array('id'=>$vo.id))}">
+                                        <if condition="empty($vo.more.thumbnail)">
+                                            <img src="__TMPL__/public/assets/images/default_tupian4.png"
+                                                 class="img-responsive" alt="{$vo.element_title}"/>
+                                            <else/>
+                                            <img src="{:cmf_get_image_url($vo.more.thumbnail)}"
+                                                 class="img-responsive" alt="{$vo.element_title}"/>
+                                        </if>
+                                    </a>
+                                </dt>
+                                <dd>
+                                    <a href="{:cmf_url('car/Element/index',array('id'=>$vo['id']))}">{$vo.element_title}</a>
+                                </dd>
+                            </dl>
+                        </car:elements>
+                    </div>
+                </div>
+            </widget>
+        </div>
+
+
+    </div>
+
+    <include file="public@footer"/>
+</div>
+
+<include file="public@scripts"/>
+<hook name="before_body_end"/>
+</body>
+</html>
