@@ -20,7 +20,7 @@
                 <tr>
                     <td>
                         <php>$checked = in_array($vo['id'],$selectedIds)?'checked':'';</php>
-                        <input type="radio" class="js-check" data-yid="js-check-y" data-xid="js-check-x" name="ids[]"
+                        <input type="checkbox" class="js-check" data-yid="js-check-y" data-xid="js-check-x" name="ids[]"
                                value="{$vo.id}" data-name="{$vo.name}" {$checked}>
                     </td>
                     <td>{$vo.id}</td>

@@ -30,7 +30,7 @@
                                  brandIds="$brand.id"
                                  returnVarName="elements_data">
                     <div class="list-boxes">
-                        <h2><a href="{:cmf_url('car/Element/index',array('id'=>$vo['id'],'cid'=>$brand['id']))}">{$vo.element_title}</a>
+                        <h2><a href="{:cmf_url('car/Element/index',array('id'=>$vo['id']))}" target="_blank">{$vo.element_title}</a>
                         </h2>
                         <p>{$vo.element_excerpt}</p>
                         <div>
@@ -51,7 +51,7 @@
                                 </div>
                             </div>
                             <a class="btn btn-warning btn-sm pull-right"
-                               href="{:cmf_url('car/Element/index',array('id'=>$vo['id'],'cid'=>$brand['id']))}">查看更多</a>
+                               href="{:cmf_url('car/Element/index',array('id'=>$vo['id']))}" target="_blank">查看更多</a>
                         </div>
                     </div>
                 </car:elements>

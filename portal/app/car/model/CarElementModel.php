@@ -246,7 +246,7 @@ class CarElementModel extends Model
             $areas = explode(',', $areas);//将字符串打散为数组
         }
         $this->brands()->save($brands);
-        $this->ages()->save($data['ages']);
+       // $this->ages()->save($data['ages']);
         $this->colors()->save($data['colors']);
         $this->countrys()->save($data['countrys']);
         $this->displacementRanges()->save($data['displacementRanges']);
@@ -257,7 +257,7 @@ class CarElementModel extends Model
         $this->levels()->save($data['levels']);
         $this->lightspots()->save($lightspots);
         $this->mileages()->save($data['mileages']);
-        $this->priceRanges()->save($data['priceRanges']);
+        //$this->priceRanges()->save($data['priceRanges']);
         $this->productionTypes()->save($data['productionTypes']);
         $this->seats()->save($data['seats']);
         $this->areas()->save($areas);
@@ -317,6 +317,7 @@ class CarElementModel extends Model
         if (!empty($newBrandIds)) {
             $this->brands()->attach(array_values($newBrandIds));
         }
+        /*
         //车龄
         $ages=$data['ages'];
         if (is_string($ages)) {
@@ -335,6 +336,7 @@ class CarElementModel extends Model
         if (!empty($newAgeIds)) {
             $this->ages()->attach(array_values($newAgeIds));
         }
+        */
         //车颜色
         $colors=$data['colors'];
         if (is_string($colors)) {
@@ -527,8 +529,9 @@ class CarElementModel extends Model
         if (!empty($newMileageIds)) {
             $this->mileages()->attach(array_values($newMileageIds));
         }
-
+/*
         //车价格范围
+
         $priceRanges=$data['priceRanges'];
 
         if (is_string($priceRanges)) {
@@ -547,7 +550,7 @@ class CarElementModel extends Model
         if (!empty($newPriceRangeIds)) {
             $this->priceRanges()->attach(array_values($newPriceRangeIds));
         }
-
+*/
         //车生产方式
         $productionTypes=$data['productionTypes'];
         if (is_string($productionTypes)) {

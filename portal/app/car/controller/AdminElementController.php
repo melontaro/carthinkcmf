@@ -197,10 +197,10 @@ class AdminElementController extends AdminBaseController
 
         $elementbrands  = $element->brands()->alias('a')->column('a.name', 'a.id');//数组
         $elementBrandIds = implode(',', array_keys($elementbrands));//把数组元素组合为字符串
-
+/*
         $elementages  = $element->ages()->alias('a')->column('*', 'a.id');
         $elementAgeIds = implode(',', array_keys($elementages));
-
+*/
         $elementareas  = $element->areas()->alias('a')->column('a.name', 'a.id');
         $elementAreaIds = implode(',', array_keys($elementareas));
 
@@ -249,8 +249,10 @@ class AdminElementController extends AdminBaseController
         $this->assign('element', $element);
         $this->assign('element_brands', $elementbrands);
         $this->assign('element_brand_ids', $elementBrandIds);
+        /*
         $this->assign('element_ages', $elementages);
         $this->assign('element_age_ids', $elementAgeIds);
+        */
         $this->assign('element_areas', $elementareas);
         $this->assign('element_area_ids', $elementAreaIds);
         $this->assign('element_colors', $elementcolors);

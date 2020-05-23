@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 23/05/2020 18:38:11
+ Date: 24/05/2020 07:47:13
 */
 
 SET NAMES utf8mb4;
@@ -365,7 +365,7 @@ CREATE TABLE `cmf_asset`  (
   `suffix` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '文件后缀名,不包括点',
   `more` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '其它详细信息,JSON格式',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '资源表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '资源表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cmf_asset
@@ -379,6 +379,7 @@ INSERT INTO `cmf_asset` VALUES (6, 1, 9897, 1589770422, 1, 0, '088aa6eda79adcacd
 INSERT INTO `cmf_asset` VALUES (7, 1, 11359, 1589770463, 1, 0, '9b9b1e0d3b4cd3d622294e80d85659a6ec756621c29f6df6a06ab4ca1ab257d5', 'bieke.png', 'car/20200518/78a1ea6fac99bfa93c2b78f70fd3e9bb.png', '9b9b1e0d3b4cd3d622294e80d85659a6', '7f729ff9f3e2a179caddff77804a99c6457d8322', 'png', NULL);
 INSERT INTO `cmf_asset` VALUES (8, 1, 94833, 1589778107, 1, 0, 'c81970dfef8299d4ed6dfbb8c6f3a28f9fad90bc60b4730d6f5b2fd2fba80d33', 'aodi.jpeg', 'car/20200518/e0f4a1d79ef2477593963876701a5a75.jpeg', 'c81970dfef8299d4ed6dfbb8c6f3a28f', 'dcb3623c2d148a1aa769418160208295117cf5a7', 'jpeg', NULL);
 INSERT INTO `cmf_asset` VALUES (9, 1, 105091, 1589822086, 1, 0, 'cb22af6025687c739c33fc49ed0c155dcc0c67dc2e234abe1228137e02d203aa', '1.jpeg', 'car/20200519/576aab07c479b224f64b68b5a3c16315.jpeg', 'cb22af6025687c739c33fc49ed0c155d', '7f2b0b6889fc011564f80785998de5703affdbd4', 'jpeg', NULL);
+INSERT INTO `cmf_asset` VALUES (10, 1, 99652, 1590277503, 1, 0, 'c2b03e78305de3e4b56763062d03308f3a5f0c9bc745f08c693683a06e851658', 'dazhong.jpg', 'car/20200524/0b19154c2aeed82e92a4e1de4f286433.jpg', 'c2b03e78305de3e4b56763062d03308f', '5132916f637517a056d34b7b1a233c3f3e1c2dcf', 'jpg', NULL);
 
 -- ----------------------------
 -- Table structure for cmf_auth_access
@@ -805,13 +806,14 @@ CREATE TABLE `cmf_car_area_element`  (
   `status` tinyint(3) UNSIGNED NOT NULL DEFAULT 1 COMMENT '状态,1:发布;0:不发布',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `term_taxonomy_id`(`area_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'portal应用 分类文章对应表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'portal应用 分类文章对应表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cmf_car_area_element
 -- ----------------------------
 INSERT INTO `cmf_car_area_element` VALUES (1, 2, 1, 10000, 1);
 INSERT INTO `cmf_car_area_element` VALUES (2, 2, 7, 10000, 1);
+INSERT INTO `cmf_car_area_element` VALUES (3, 3, 2, 10000, 1);
 
 -- ----------------------------
 -- Table structure for cmf_car_brand
@@ -859,13 +861,14 @@ CREATE TABLE `cmf_car_brand_element`  (
   `status` tinyint(3) UNSIGNED NOT NULL DEFAULT 1 COMMENT '状态,1:发布;0:不发布',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `term_taxonomy_id`(`brand_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'portal应用 分类文章对应表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'portal应用 分类文章对应表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cmf_car_brand_element
 -- ----------------------------
 INSERT INTO `cmf_car_brand_element` VALUES (1, 1, 2, 10000, 1);
 INSERT INTO `cmf_car_brand_element` VALUES (2, 2, 3, 10000, 1);
+INSERT INTO `cmf_car_brand_element` VALUES (3, 3, 1, 10000, 1);
 
 -- ----------------------------
 -- Table structure for cmf_car_color
@@ -908,13 +911,14 @@ CREATE TABLE `cmf_car_color_element`  (
   `status` tinyint(3) UNSIGNED NOT NULL DEFAULT 1 COMMENT '状态,1:发布;0:不发布',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `post_id`(`element_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'portal应用 标签文章对应表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'portal应用 标签文章对应表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cmf_car_color_element
 -- ----------------------------
 INSERT INTO `cmf_car_color_element` VALUES (1, 1, 1, 1);
 INSERT INTO `cmf_car_color_element` VALUES (2, 4, 2, 1);
+INSERT INTO `cmf_car_color_element` VALUES (3, 3, 3, 1);
 
 -- ----------------------------
 -- Table structure for cmf_car_country
@@ -956,13 +960,14 @@ CREATE TABLE `cmf_car_country_element`  (
   `status` tinyint(3) UNSIGNED NOT NULL DEFAULT 1 COMMENT '状态,1:发布;0:不发布',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `post_id`(`element_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'portal应用 标签文章对应表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'portal应用 标签文章对应表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cmf_car_country_element
 -- ----------------------------
 INSERT INTO `cmf_car_country_element` VALUES (1, 2, 1, 1);
 INSERT INTO `cmf_car_country_element` VALUES (2, 1, 2, 1);
+INSERT INTO `cmf_car_country_element` VALUES (3, 1, 3, 1);
 
 -- ----------------------------
 -- Table structure for cmf_car_displacement_range
@@ -996,13 +1001,16 @@ CREATE TABLE `cmf_car_displacement_range_element`  (
   `status` tinyint(3) UNSIGNED NOT NULL DEFAULT 1 COMMENT '状态,1:发布;0:不发布',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `post_id`(`element_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'portal应用 标签文章对应表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'portal应用 标签文章对应表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cmf_car_displacement_range_element
 -- ----------------------------
 INSERT INTO `cmf_car_displacement_range_element` VALUES (1, 9, 1, 1);
 INSERT INTO `cmf_car_displacement_range_element` VALUES (2, 8, 2, 1);
+INSERT INTO `cmf_car_displacement_range_element` VALUES (3, 1, 2, 1);
+INSERT INTO `cmf_car_displacement_range_element` VALUES (6, 2, 1, 1);
+INSERT INTO `cmf_car_displacement_range_element` VALUES (7, 8, 3, 1);
 
 -- ----------------------------
 -- Table structure for cmf_car_element
@@ -1034,18 +1042,22 @@ CREATE TABLE `cmf_car_element`  (
   `element_content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '文章内容',
   `element_content_filtered` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '处理过的文章内容',
   `more` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '扩展属性,如缩略图;格式为json',
+  `element_age` int(255) UNSIGNED NOT NULL DEFAULT 2013 COMMENT '车龄',
+  `element_sell_price` double(10, 2) UNSIGNED NOT NULL DEFAULT 8.00 COMMENT '汽车售价',
+  `element_original_price` double(10, 2) UNSIGNED DEFAULT 10.00 COMMENT '汽车原价',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `type_status_date`(`element_type`, `element_status`, `create_time`, `id`) USING BTREE,
   INDEX `parent_id`(`parent_id`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE,
   INDEX `create_time`(`create_time`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'portal应用 文章表' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'portal应用 文章表' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of cmf_car_element
 -- ----------------------------
-INSERT INTO `cmf_car_element` VALUES (1, 0, 1, 1, 1, 1, 1, 0, 0, 6, 0, 0, 0, 1589778113, 1589818357, 1589778120, 0, '16年奥迪A4L', '', '', '', 'car/20200518/e0f4a1d79ef2477593963876701a5a75.jpeg', '&lt;p&gt;&lt;span style=&quot;color: rgb(51, 51, 51); font-family: &quot;&gt;明盘福利！16年16款奥迪A4L 天窗 导航 多功能方向盘 一键启动 无钥匙进入 电动座椅加热 定速巡航 抵押银行违章审车正常 车况精品 手续齐全 菏泽找我提&lt;/span&gt;&lt;/p&gt;', NULL, '{\"audio\":\"\",\"video\":\"\",\"thumbnail\":\"car\\/20200518\\/e0f4a1d79ef2477593963876701a5a75.jpeg\",\"template\":\"\"}');
-INSERT INTO `cmf_car_element` VALUES (2, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1589822090, 1589822090, 1589822175, 0, '14年奥迪Q3', '', '', '', 'car/20200519/576aab07c479b224f64b68b5a3c16315.jpeg', '&lt;p&gt;撒发给E&lt;/p&gt;', NULL, '{\"audio\":\"\",\"video\":\"\",\"thumbnail\":\"car\\/20200519\\/576aab07c479b224f64b68b5a3c16315.jpeg\",\"template\":\"\"}');
+INSERT INTO `cmf_car_element` VALUES (1, 0, 1, 1, 1, 1, 1, 0, 1, 17, 0, 0, 0, 1589778113, 1590274872, 1589778120, 0, '16年奥迪A4L', '', '', '', 'car/20200518/e0f4a1d79ef2477593963876701a5a75.jpeg', '&lt;p&gt;&lt;span style=&quot;color: rgb(51, 51, 51); font-family: &quot;&gt;明盘福利！16年16款奥迪A4L 天窗 导航 多功能方向盘 一键启动 无钥匙进入 电动座椅加热 定速巡航 抵押银行违章审车正常 车况精品 手续齐全 菏泽找我提&lt;/span&gt;&lt;/p&gt;', NULL, '{\"audio\":\"\",\"video\":\"\",\"thumbnail\":\"car\\/20200518\\/e0f4a1d79ef2477593963876701a5a75.jpeg\",\"template\":\"element\"}', 2013, 8.00, 10.00);
+INSERT INTO `cmf_car_element` VALUES (2, 0, 1, 1, 1, 1, 1, 0, 1, 4, 0, 0, 0, 1589822090, 1590277176, 1589822160, 0, '14年奥迪Q3', '', '', '', 'car/20200519/576aab07c479b224f64b68b5a3c16315.jpeg', '&lt;p&gt;撒发给E&lt;/p&gt;', NULL, '{\"audio\":\"\",\"video\":\"\",\"thumbnail\":\"car\\/20200519\\/576aab07c479b224f64b68b5a3c16315.jpeg\",\"template\":\"element\"}', 2006, 9.00, 10.00);
+INSERT INTO `cmf_car_element` VALUES (3, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1590277507, 1590277507, 1590277518, 0, '12年大众', '', '', '', 'car/20200524/0b19154c2aeed82e92a4e1de4f286433.jpg', '&lt;p&gt;撒旦法飞洒地方方式&lt;/p&gt;', NULL, '{\"audio\":\"\",\"video\":\"\",\"thumbnail\":\"car\\/20200524\\/0b19154c2aeed82e92a4e1de4f286433.jpg\",\"template\":\"element\"}', 2012, 2.00, 12.00);
 
 -- ----------------------------
 -- Table structure for cmf_car_emission_standard
@@ -1083,13 +1095,14 @@ CREATE TABLE `cmf_car_emission_standard_element`  (
   `status` tinyint(3) UNSIGNED NOT NULL DEFAULT 1 COMMENT '状态,1:发布;0:不发布',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `post_id`(`element_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'portal应用 标签文章对应表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'portal应用 标签文章对应表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cmf_car_emission_standard_element
 -- ----------------------------
 INSERT INTO `cmf_car_emission_standard_element` VALUES (1, 1, 1, 1);
 INSERT INTO `cmf_car_emission_standard_element` VALUES (2, 1, 2, 1);
+INSERT INTO `cmf_car_emission_standard_element` VALUES (3, 3, 3, 1);
 
 -- ----------------------------
 -- Table structure for cmf_car_energy
@@ -1125,13 +1138,14 @@ CREATE TABLE `cmf_car_energy_element`  (
   `status` tinyint(3) UNSIGNED NOT NULL DEFAULT 1 COMMENT '状态,1:发布;0:不发布',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `post_id`(`element_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'portal应用 标签文章对应表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'portal应用 标签文章对应表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cmf_car_energy_element
 -- ----------------------------
 INSERT INTO `cmf_car_energy_element` VALUES (1, 1, 1, 1);
-INSERT INTO `cmf_car_energy_element` VALUES (2, 2, 2, 1);
+INSERT INTO `cmf_car_energy_element` VALUES (3, 3, 2, 1);
+INSERT INTO `cmf_car_energy_element` VALUES (4, 4, 3, 1);
 
 -- ----------------------------
 -- Table structure for cmf_car_engine
@@ -1165,13 +1179,14 @@ CREATE TABLE `cmf_car_engine_element`  (
   `status` tinyint(3) UNSIGNED NOT NULL DEFAULT 1 COMMENT '状态,1:发布;0:不发布',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `post_id`(`element_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'portal应用 标签文章对应表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'portal应用 标签文章对应表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cmf_car_engine_element
 -- ----------------------------
 INSERT INTO `cmf_car_engine_element` VALUES (1, 1, 1, 1);
 INSERT INTO `cmf_car_engine_element` VALUES (2, 4, 2, 1);
+INSERT INTO `cmf_car_engine_element` VALUES (3, 4, 3, 1);
 
 -- ----------------------------
 -- Table structure for cmf_car_gearbox
@@ -1203,13 +1218,14 @@ CREATE TABLE `cmf_car_gearbox_element`  (
   `status` tinyint(3) UNSIGNED NOT NULL DEFAULT 1 COMMENT '状态,1:发布;0:不发布',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `post_id`(`element_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'portal应用 标签文章对应表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'portal应用 标签文章对应表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cmf_car_gearbox_element
 -- ----------------------------
 INSERT INTO `cmf_car_gearbox_element` VALUES (1, 2, 1, 1);
-INSERT INTO `cmf_car_gearbox_element` VALUES (2, 2, 2, 1);
+INSERT INTO `cmf_car_gearbox_element` VALUES (3, 3, 2, 1);
+INSERT INTO `cmf_car_gearbox_element` VALUES (4, 2, 3, 1);
 
 -- ----------------------------
 -- Table structure for cmf_car_level
@@ -1251,13 +1267,14 @@ CREATE TABLE `cmf_car_level_element`  (
   `status` tinyint(3) UNSIGNED NOT NULL DEFAULT 1 COMMENT '状态,1:发布;0:不发布',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `post_id`(`element_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'portal应用 标签文章对应表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'portal应用 标签文章对应表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cmf_car_level_element
 -- ----------------------------
 INSERT INTO `cmf_car_level_element` VALUES (1, 2, 1, 1);
-INSERT INTO `cmf_car_level_element` VALUES (2, 3, 2, 1);
+INSERT INTO `cmf_car_level_element` VALUES (3, 2, 2, 1);
+INSERT INTO `cmf_car_level_element` VALUES (4, 2, 3, 1);
 
 -- ----------------------------
 -- Table structure for cmf_car_lightspot
@@ -1305,13 +1322,17 @@ CREATE TABLE `cmf_car_lightspot_element`  (
   `status` tinyint(3) UNSIGNED NOT NULL DEFAULT 1 COMMENT '状态,1:发布;0:不发布',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `post_id`(`element_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'portal应用 标签文章对应表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'portal应用 标签文章对应表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cmf_car_lightspot_element
 -- ----------------------------
-INSERT INTO `cmf_car_lightspot_element` VALUES (1, 2, 2, 1);
-INSERT INTO `cmf_car_lightspot_element` VALUES (2, 3, 2, 1);
+INSERT INTO `cmf_car_lightspot_element` VALUES (3, 0, 1, 1);
+INSERT INTO `cmf_car_lightspot_element` VALUES (4, 1, 1, 1);
+INSERT INTO `cmf_car_lightspot_element` VALUES (5, 1, 2, 1);
+INSERT INTO `cmf_car_lightspot_element` VALUES (6, 3, 2, 1);
+INSERT INTO `cmf_car_lightspot_element` VALUES (7, 3, 3, 1);
+INSERT INTO `cmf_car_lightspot_element` VALUES (8, 4, 3, 1);
 
 -- ----------------------------
 -- Table structure for cmf_car_mileage
@@ -1344,12 +1365,16 @@ CREATE TABLE `cmf_car_mileage_element`  (
   `status` tinyint(3) UNSIGNED NOT NULL DEFAULT 1 COMMENT '状态,1:发布;0:不发布',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `post_id`(`element_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'portal应用 标签文章对应表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'portal应用 标签文章对应表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cmf_car_mileage_element
 -- ----------------------------
-INSERT INTO `cmf_car_mileage_element` VALUES (1, 3, 2, 1);
+INSERT INTO `cmf_car_mileage_element` VALUES (2, 0, 1, 1);
+INSERT INTO `cmf_car_mileage_element` VALUES (3, 0, 1, 1);
+INSERT INTO `cmf_car_mileage_element` VALUES (4, 0, 1, 1);
+INSERT INTO `cmf_car_mileage_element` VALUES (6, 5, 2, 1);
+INSERT INTO `cmf_car_mileage_element` VALUES (7, 3, 3, 1);
 
 -- ----------------------------
 -- Table structure for cmf_car_price_range
@@ -1386,12 +1411,12 @@ CREATE TABLE `cmf_car_price_range_element`  (
   `status` tinyint(3) UNSIGNED NOT NULL DEFAULT 1 COMMENT '状态,1:发布;0:不发布',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `post_id`(`element_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'portal应用 标签文章对应表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'portal应用 标签文章对应表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cmf_car_price_range_element
 -- ----------------------------
-INSERT INTO `cmf_car_price_range_element` VALUES (1, 2, 2, 1);
+INSERT INTO `cmf_car_price_range_element` VALUES (2, 0, 2, 1);
 
 -- ----------------------------
 -- Table structure for cmf_car_production_type
@@ -1424,12 +1449,13 @@ CREATE TABLE `cmf_car_production_type_element`  (
   `status` tinyint(3) UNSIGNED NOT NULL DEFAULT 1 COMMENT '状态,1:发布;0:不发布',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `post_id`(`element_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'portal应用 标签文章对应表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'portal应用 标签文章对应表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cmf_car_production_type_element
 -- ----------------------------
 INSERT INTO `cmf_car_production_type_element` VALUES (1, 3, 2, 1);
+INSERT INTO `cmf_car_production_type_element` VALUES (2, 4, 3, 1);
 
 -- ----------------------------
 -- Table structure for cmf_car_seat
@@ -1462,12 +1488,13 @@ CREATE TABLE `cmf_car_seat_element`  (
   `status` tinyint(3) UNSIGNED NOT NULL DEFAULT 1 COMMENT '状态,1:发布;0:不发布',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `post_id`(`element_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'portal应用 标签文章对应表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'portal应用 标签文章对应表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cmf_car_seat_element
 -- ----------------------------
 INSERT INTO `cmf_car_seat_element` VALUES (1, 2, 2, 1);
+INSERT INTO `cmf_car_seat_element` VALUES (2, 3, 3, 1);
 
 -- ----------------------------
 -- Table structure for cmf_car_tag

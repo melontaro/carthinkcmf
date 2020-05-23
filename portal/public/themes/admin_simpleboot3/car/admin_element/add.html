@@ -49,11 +49,14 @@
                     <tr>
                         <th width="100">车龄<span class="form-required">*</span></th>
                         <td>
+                            <input class="yearselect sample form-control" name="element[element_age]" id="sample" value="2000">
+                            <!--
                             <input class="form-control" type="text" style="width:400px;" required value=""
                                    placeholder="请选择车龄" onclick="doSelectAge();" id="js-ages-name-input"
                                    readonly/>
                             <input class="form-control" type="hidden" value="" name="element[ages]"
                                    id="js-ages-id-input"/>
+                                   -->
                         </td>
                     </tr>
                     <tr>
@@ -156,16 +159,7 @@
                                    id="js-mileages-id-input"/>
                         </td>
                     </tr>
-                    <tr>
-                        <th width="100">车价格范围<span class="form-required">*</span></th>
-                        <td>
-                            <input class="form-control" type="text" style="width:400px;" required value=""
-                                   placeholder="请选择车价格范围" onclick="doSelectPriceRange();" id="js-priceRanges-name-input"
-                                   readonly/>
-                            <input class="form-control" type="hidden" value="" name="element[priceRanges]"
-                                   id="js-priceRanges-id-input"/>
-                        </td>
-                    </tr>
+           
                     <tr>
                         <th width="100">车生产方式<span class="form-required">*</span></th>
                         <td>
@@ -194,6 +188,22 @@
                                    readonly/>
                             <input class="form-control" type="hidden" value="" name="element[areas]"
                                    id="js-areas-id-input"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>售价<span class="form-required">*</span></th>
+                        <td>
+                            <input class="form-control" type="number" name="element[element_sell_price]"
+                                   id="sell_price" required value="" placeholder="请输价格" />
+                            <p class="text-danger">万元(单位为:万元,可填写如:5.6,  0.8)</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>原价</th>
+                        <td>
+                            <input class="form-control" type="number" name="element[element_original_price]"
+                                   id="original_price" required value="" placeholder="请输入原价" />
+                            <p class="text-danger">万元(单位为:万元,可填写如:5.6,  0.8)</p>
                         </td>
                     </tr>
 
@@ -342,6 +352,7 @@
 </script>
 <script type="text/javascript" src="__STATIC__/js/ueditor/ueditor.config.js"></script>
 <script type="text/javascript" src="__STATIC__/js/ueditor/ueditor.all.min.js"></script>
+<script src="__TMPL__/public/assets/js/year-select.js"></script>
 <script type="text/javascript">
     $(function () {
 
@@ -356,6 +367,13 @@
             $('#thumbnail-preview').attr('src', '__TMPL__/public/assets/images/default-thumbnail.png');
             $('#thumbnail').val('');
         });
+
+        $(document).ready(function(e) {
+            $('.yearselect').yearselect();
+
+
+        });
+
 
     });
 
