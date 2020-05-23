@@ -234,7 +234,7 @@ class AdminElementController extends AdminBaseController
         $elementmileages  = $element->mileages()->alias('a')->column('a.num', 'a.id');
         $elementMileageIds = implode(',', array_keys($elementmileages));
 
-        $elementpriceranges  = $element->priceRanges()->alias('a')->column('a.min_price', 'a.max_price','a.id');
+        $elementpriceranges  = $element->priceRanges()->alias('a')->column('*','a.id');
         $elementPriceRangeIds = implode(',', array_keys($elementpriceranges));
 
         $elementproductiontypes  = $element->productionTypes()->alias('a')->column('a.name','a.id');

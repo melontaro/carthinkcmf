@@ -317,6 +317,295 @@ class CarElementModel extends Model
         if (!empty($newBrandIds)) {
             $this->brands()->attach(array_values($newBrandIds));
         }
+        //车龄
+        $ages=$data['ages'];
+        if (is_string($ages)) {
+            $ages = explode(',', $ages);
+        }
+
+        $oldAgeIds        = $this->ages()->column('age_id');
+        $sameAgeIds       = array_intersect($ages, $oldAgeIds);
+        $needDeleteAgeIds = array_diff($oldAgeIds, $sameAgeIds);
+        $newAgeIds        = array_diff($ages, $sameAgeIds);
+
+        if (!empty($needDeleteAgeIds)) {
+            $this->ages()->detach($needDeleteAgeIds);
+        }
+
+        if (!empty($newAgeIds)) {
+            $this->ages()->attach(array_values($newAgeIds));
+        }
+        //车颜色
+        $colors=$data['colors'];
+        if (is_string($colors)) {
+            $colors = explode(',', $colors);
+        }
+
+        $oldColorIds        = $this->colors()->column('color_id');
+        $sameColorIds       = array_intersect($colors, $oldColorIds);
+        $needDeleteColorIds = array_diff($oldColorIds, $sameColorIds);
+        $newColorIds        = array_diff($colors, $sameColorIds);
+
+        if (!empty($needDeleteColorIds)) {
+            $this->colors()->detach($needDeleteColorIds);
+        }
+
+        if (!empty($newColorIds)) {
+            $this->colors()->attach(array_values($newColorIds));
+        }
+        //车国籍
+        $countrys=$data['countrys'];
+        if (is_string($countrys)) {
+            $countrys = explode(',', $countrys);
+        }
+
+        $oldCountryIds        = $this->countrys()->column('country_id');
+        $sameCountryIds       = array_intersect($countrys, $oldCountryIds);
+        $needDeleteCountryIds = array_diff($oldCountryIds, $sameCountryIds);
+        $newCountryIds        = array_diff($countrys, $sameCountryIds);
+
+        if (!empty($needDeleteCountryIds)) {
+            $this->countrys()->detach($needDeleteCountryIds);
+        }
+
+        if (!empty($newCountryIds)) {
+            $this->countrys()->attach(array_values($newCountryIds));
+        }
+        //车排量
+
+         $displacementRanges=$data['displacementRanges'];
+        if (is_string($displacementRanges)) {
+            $displacementRanges = explode(',', $displacementRanges);
+        }
+
+        $oldDisplacementRangeIds        = $this->displacementRanges()->column('displacement_range_id');
+        $sameDisplacementRangeIds       = array_intersect($displacementRanges, $oldDisplacementRangeIds);
+        $needDeleteDisplacementRangeIds = array_diff($oldBrandIds, $sameDisplacementRangeIds);
+        $newDisplacementRangeIds        = array_diff($displacementRanges, $sameDisplacementRangeIds);
+
+        if (!empty($needDeleteDisplacementRangeIds)) {
+            $this->displacementRanges()->detach($needDeleteDisplacementRangeIds);
+        }
+
+        if (!empty($newDisplacementRangeIds)) {
+            $this->displacementRanges()->attach(array_values($newDisplacementRangeIds));
+        }
+        //排放标准
+        $emissionStandards=$data['emissionStandards'];
+        if (is_string($emissionStandards)) {
+            $emissionStandards = explode(',', $emissionStandards);
+        }
+
+        $oldEmissionStandardIds        = $this->emissionStandards()->column('emission_standard_id');
+        $sameEmissionStandardIds       = array_intersect($emissionStandards, $oldEmissionStandardIds);
+        $needDeleteEmissionStandardIds = array_diff($oldEmissionStandardIds, $sameEmissionStandardIds);
+        $newEmissionStandardIds        = array_diff($emissionStandards, $sameEmissionStandardIds);
+
+        if (!empty($needDeleteEmissionStandardIds)) {
+            $this->emissionStandards()->detach($needDeleteEmissionStandardIds);
+        }
+
+        if (!empty($newEmissionStandardIds)) {
+            $this->emissionStandards()->attach(array_values($newEmissionStandardIds));
+        }
+
+        //车能源
+        $energys=$data['energys'];
+        if (is_string($energys)) {
+            $energys = explode(',', $energys);
+        }
+
+        $oldEnergyIds        = $this->energys()->column('energy_id');
+        $sameEnergyIds       = array_intersect($energys, $oldEnergyIds);
+        $needDeleteEnergyIds = array_diff($oldEnergyIds, $sameEnergyIds);
+        $newEnergyIds        = array_diff($energys, $sameEnergyIds);
+
+        if (!empty($needDeleteEnergyIds)) {
+            $this->energys()->detach($needDeleteEnergyIds);
+        }
+
+        if (!empty($newEnergyIds)) {
+            $this->energys()->attach(array_values($newEnergyIds));
+        }
+
+        //车发动机
+        $engines=$data['engines'];
+        if (is_string($engines)) {
+            $engines = explode(',', $engines);
+        }
+
+        $oldEngineIds        = $this->engines()->column('engine_id');
+        $sameEngineIds       = array_intersect($engines, $oldEngineIds);
+        $needDeleteEngineIds = array_diff($oldEngineIds, $sameEngineIds);
+        $newEngineIds        = array_diff($engines, $sameEngineIds);
+
+        if (!empty($needDeleteEngineIds)) {
+            $this->engines()->detach($needDeleteEngineIds);
+        }
+
+        if (!empty($newEngineIds)) {
+            $this->engines()->attach(array_values($newEngineIds));
+        }
+
+        //车变速箱
+        $gearboxs=$data['gearboxs'];
+        if (is_string($gearboxs)) {
+            $gearboxs = explode(',', $gearboxs);
+        }
+
+        $oldGearboxIds        = $this->gearboxs()->column('gearbox_id');
+        $sameGearboxIds       = array_intersect($gearboxs, $oldGearboxIds);
+        $needDeleteGearboxIds = array_diff($oldGearboxIds, $sameGearboxIds);
+        $newGearboxIds        = array_diff($gearboxs, $sameGearboxIds);
+
+        if (!empty($needDeleteGearboxIds)) {
+            $this->gearboxs()->detach($needDeleteGearboxIds);
+        }
+
+        if (!empty($newGearboxIds)) {
+            $this->gearboxs()->attach(array_values($newGearboxIds));
+        }
+
+
+        //车级别
+        $levels=$data['levels'];
+
+        if (is_string($levels)) {
+            $levels = explode(',', $levels);
+        }
+
+        $oldLevelIds        = $this->levels()->column('level_id');
+        $sameLevelIds       = array_intersect($levels, $oldLevelIds);
+        $needDeleteLevelIds = array_diff($oldLevelIds, $sameLevelIds);
+        $newLevelIds        = array_diff($levels, $sameLevelIds);
+
+        if (!empty($needDeleteLevelIds)) {
+            $this->levels()->detach($needDeleteLevelIds);
+        }
+
+        if (!empty($newLevelIds)) {
+            $this->levels()->attach(array_values($newLevelIds));
+        }
+
+
+        //车亮点
+        $lightspots=$data['lightspots'];
+        if (is_string($lightspots)) {
+            $lightspots = explode(',', $lightspots);
+        }
+
+        $oldLightspotIds        = $this->lightspots()->column('lightspot_id');
+        $sameLightspotIds       = array_intersect($lightspots, $oldLightspotIds);
+        $needDeleteLightspotIds = array_diff($oldLightspotIds, $sameLightspotIds);
+        $newLightspotIds        = array_diff($lightspots, $sameLightspotIds);
+
+        if (!empty($needDeleteLightspotIds)) {
+            $this->lightspots()->detach($needDeleteLightspotIds);
+        }
+
+        if (!empty($newLightspotIds)) {
+            $this->lightspots()->attach(array_values($newLightspotIds));
+        }
+
+
+        //车里程
+        $mileages=$data['mileages'];
+
+        if (is_string($mileages)) {
+            $mileages = explode(',', $mileages);
+        }
+
+        $oldMileageIds        = $this->mileages()->column('mileage_id');
+        $sameMileageIds       = array_intersect($mileages, $oldMileageIds);
+        $needDeleteMileageIds = array_diff($oldMileageIds, $sameMileageIds);
+        $newMileageIds        = array_diff($mileages, $sameMileageIds);
+
+        if (!empty($needDeleteMileageIds)) {
+            $this->mileages()->detach($needDeleteMileageIds);
+        }
+
+        if (!empty($newMileageIds)) {
+            $this->mileages()->attach(array_values($newMileageIds));
+        }
+
+        //车价格范围
+        $priceRanges=$data['priceRanges'];
+
+        if (is_string($priceRanges)) {
+            $priceRanges = explode(',', $priceRanges);
+        }
+
+        $oldPriceRangeIds        = $this->priceRanges()->column('price_range_id');
+        $samePriceRangeIds       = array_intersect($priceRanges, $oldPriceRangeIds);
+        $needDeletePriceRangeIds = array_diff($oldPriceRangeIds, $samePriceRangeIds);
+        $newPriceRangeIds        = array_diff($priceRanges, $samePriceRangeIds);
+
+        if (!empty($needDeletePriceRangeIds)) {
+            $this->priceRanges()->detach($needDeletePriceRangeIds);
+        }
+
+        if (!empty($newPriceRangeIds)) {
+            $this->priceRanges()->attach(array_values($newPriceRangeIds));
+        }
+
+        //车生产方式
+        $productionTypes=$data['productionTypes'];
+        if (is_string($productionTypes)) {
+            $productionTypes = explode(',', $productionTypes);
+        }
+
+        $oldProductionTypeIds        = $this->productionTypes()->column('production_type_id');
+        $sameProductionTypeIds       = array_intersect($productionTypes, $oldProductionTypeIds);
+        $needDeleteProductionTypeIds = array_diff($oldProductionTypeIds, $sameProductionTypeIds);
+        $newProductionTypeIds        = array_diff($productionTypes, $sameProductionTypeIds);
+
+        if (!empty($needDeleteProductionTypeIds)) {
+            $this->productionTypes()->detach($needDeleteProductionTypeIds);
+        }
+
+        if (!empty($newProductionTypeIds)) {
+            $this->productionTypes()->attach(array_values($newProductionTypeIds));
+        }
+
+        //车座位数
+        $seats=$data['seats'];
+        if (is_string($seats)) {
+            $seats = explode(',', $seats);
+        }
+
+        $oldSeatIds        = $this->seats()->column('seat_id');
+        $sameSeatIds       = array_intersect($seats, $oldSeatIds);
+        $needDeleteSeatIds = array_diff($oldSeatIds, $sameSeatIds);
+        $newSeatIds        = array_diff($seats, $sameSeatIds);
+
+        if (!empty($needDeleteSeatIds)) {
+            $this->seats()->detach($needDeleteSeatIds);
+        }
+
+        if (!empty($newSeatIds)) {
+            $this->seats()->attach(array_values($newSeatIds));
+        }
+
+
+        //地区
+        $areas=$data['areas'];
+        if (is_string($areas)) {
+            $areas = explode(',', $areas);
+        }
+
+        $oldAreaIds        = $this->areas()->column('area_id');
+        $sameAreaIds       = array_intersect($areas, $oldAreaIds);
+        $needDeleteAreaIds = array_diff($oldAreaIds, $sameAreaIds);
+        $newAreaIds        = array_diff($areas, $sameAreaIds);
+
+        if (!empty($needDeleteAreaIds)) {
+            $this->areas()->detach($needDeleteAreaIds);
+        }
+
+        if (!empty($newAreaIds)) {
+            $this->areas()->attach(array_values($newAreaIds));
+        }
+
 
 
         $data['element_keywords'] = str_replace('，', ',', $data['element_keywords']);

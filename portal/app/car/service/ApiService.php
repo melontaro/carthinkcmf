@@ -405,7 +405,7 @@ class ApiService
      *                     )</pre>
      * @return false|\PDOStatement|string|\think\Collection
      */
-    public static function categories($param)
+    public static function brands($param)
     {
         $paramWhere = empty($param['where']) ? '' : $param['where'];
 

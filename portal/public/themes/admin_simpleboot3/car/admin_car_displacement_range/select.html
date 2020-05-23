@@ -8,7 +8,7 @@
             <tr>
                 <th width="16">
                     <label>
-                        <input type="checkbox" class="js-check-all" data-direction="x" data-checklist="js-check-x">
+                        <!--input type="checkbox" class="js-check-all" data-direction="x" data-checklist="js-check-x"-->
                     </label>
                 </th>
                 <th width="50">ID</th>
@@ -21,7 +21,7 @@
                 <tr>
                     <td>
                         <php>$checked = in_array($vo['id'],$selectedIds)?'checked':'';</php>
-                        <input type="checkbox" class="js-check" data-yid="js-check-y" data-xid="js-check-x" name="ids[]"
+                        <input type="radio" class="js-check" data-yid="js-check-y" data-xid="js-check-x" name="ids[]"
                                value="{$vo.id}" data-name="{$vo.min_displacement}-{$vo.max_displacement}升" {$checked}>
                     </td>
                     <td>{$vo.id}</td>

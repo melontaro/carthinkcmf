@@ -23,7 +23,7 @@ class Car extends TagLib
         'tagelements'      => ['attr' => 'field,where,limit,order,page,relation,returnVarName,pageVarName,tagId', 'close' => 1],//非必须属性item
         'page'             => ['attr' => 'id', 'close' => 1],//非必须属性item
         'breadcrumb'       => ['attr' => 'cid', 'close' => 1],//非必须属性self
-        'categories'       => ['attr' => 'ids,where,order', 'close' => 1],//非必须属性item
+        'brands'       => ['attr' => 'ids,where,order', 'close' => 1],//非必须属性item
         'brand'         => ['attr' => 'id', 'close' => 1],//非必须属性item
         'subcategories'    => ['attr' => 'brandId', 'close' => 1],//非必须属性item
         'allsubcategories' => ['attr' => 'brandId', 'close' => 1],//非必须属性item
@@ -113,6 +113,8 @@ class Car extends TagLib
 parse;
         return $parse;
     }
+
+
 
     /**
      * 标签车列表标签
@@ -254,12 +256,12 @@ parse;
     /**
      * 车品牌标签
      */
-    public function tagCategories($tag, $content)
+    public function tagBrands($tag, $content)
     {
         $item          = empty($tag['item']) ? 'vo' : $tag['item'];//循环变量名
         $order         = empty($tag['order']) ? '' : $tag['order'];
         $ids           = empty($tag['ids']) ? '""' : $tag['ids'];
-        $returnVarName = 'car_categories_data';
+        $returnVarName = 'car_brands_data';
         if (strpos($ids, '$') === 0) {
             $this->autoBuildVar($ids);
         }
@@ -270,7 +272,7 @@ parse;
 
         $parse = <<<parse
 <?php
-\${$returnVarName} = \app\car\service\ApiService::categories([
+\${$returnVarName} = \app\car\service\ApiService::brands([
     'where'   => {$where},
     'order'   => '{$order}',
     'ids'     => {$ids}

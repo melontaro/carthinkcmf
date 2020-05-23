@@ -104,7 +104,7 @@
                         "value": "",
                         "type": "text",
                         "dataSource": {
-                            "api": "car/Category/index",
+                            "api": "car/Brand/index",
                             "multi": true
                         },
                         "placeholder": "请选择品牌",
