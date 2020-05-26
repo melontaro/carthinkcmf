@@ -64,7 +64,7 @@
                     <div class="caption-wraper">
                         <div class="caption">{$vo.title|default=''}</div>
                     </div>
-                    <a href="{$vo.url|default=''}"><img src="{:cmf_get_image_url($vo.image)}" alt=""></a>
+                    <a href="{$vo.url|default=''}"><img src="{:cmf_get_image_url($vo.image)}" alt="" class="img-responsive"></a>
                 </li>
             </slides>
             <noslides id="$top_slide_id">
@@ -72,19 +72,19 @@
                     <div class="caption-wraper">
                         <div class="caption">此幻灯片只是演示,您没有设置任何幻灯片,请到后台模板设置！</div>
                     </div>
-                    <a href=""><img src="__TMPL__/public/assets/images/demo/1.jpg" alt=""></a>
+                    <a href=""><img src="__TMPL__/public/assets/images/demo/1.jpg" alt="" class="img-responsive"></a>
                 </li>
                 <li>
                     <div class="caption-wraper">
                         <div class="caption">此幻灯片只是演示,您没有设置任何幻灯片,请到后台模板设置！</div>
                     </div>
-                    <a href=""><img src="__TMPL__/public/assets/images/demo/2.jpg" alt=""></a>
+                    <a href=""><img src="__TMPL__/public/assets/images/demo/2.jpg" alt="" class="img-responsive"></a>
                 </li>
                 <li>
                     <div class="caption-wraper">
                         <div class="caption">此幻灯片只是演示,您没有设置任何幻灯片,请到后台模板设置！</div>
                     </div>
-                    <a href=""><img src="__TMPL__/public/assets/images/demo/3.jpg" alt=""></a>
+                    <a href=""><img src="__TMPL__/public/assets/images/demo/3.jpg" alt="" class="img-responsive"></a>
                 </li>
             </noslides>
         </ul>
@@ -108,7 +108,8 @@
                             empty($widget["vars"]["show_car_brand_id"])?1:$widget["vars"]["show_car_brand_id"];
                         </php>
                         <car:brands limit="8" ids="$widget.vars.show_car_brand_id">
-                            <a href="{:cmf_url('car/List/index',array('id'=>$vo.id))}" class="list-group-item active" target="_blank">{$vo.name}</a>
+                            <a href="{:cmf_url('car/List/index',array('id'=>$vo.id))}" class="list-group-item active"
+                               target="_blank">{$vo.name}</a>
                         </car:brands>
                     </div>
 
@@ -120,50 +121,55 @@
     </widget>
     <!--推荐抵押车-->
     <widget name="recommend_car">
-        <div class="met-index-about met-index-body" id="recommend_car">
-            <div class="title">
-                <h2 class="">
-                    {$widget.title}
-                </h2>
-                <div class="home-line">
-                </div>
-                <p class="desc">
-                </p>
+        <div class="container" id="recommend_car">
+
+            <h3>
+                {$widget.title}
+            </h3>
+            <div class="home-line">
             </div>
+            <p class="desc">
+            </p>
+
             <div class="container">
                 <div class="about-list">
 
                     <!--{:dump($widget.vars.recommend_cars)}-->
 
-                    <ul id="myTab" class="nav nav-tabs">
+                    <ul id="recommendTab" class="nav nav-tabs">
                         <volist name="$widget.vars.recommend_cars" id="vo">
                             <li
                             <eq name="$i" value="1">class="active"</eq>
                             >
-                            <a href="#cars-{$i}" data-toggle="tab">
+                            <a href="#recommend-{$i}" data-toggle="tab">
                                 {$vo.brand_id_text_}
                             </a>
                             </li>
                         </volist>
                     </ul>
                     <div class="panel-body">
-                        <div id="myTabContent" class="tab-content">
+                        <div id="recommendTabContent" class="tab-content">
                             <volist name="$widget.vars.recommend_cars" id="vo" key="k">
                                 <php>$class_text=$k==1? ' in active':'';</php>
-                                <div class="tab-pane fade{$class_text}" id="cars-{$k}">
+                                <div class="tab-pane fade{$class_text}" id="recommend-{$k}">
 
 
                                     <car:elements limit="$vo.count" order="element.recommended DESC"
                                                   brandIds="$vo.brand_id" item="v">
 
                                         <div class="col-sm-4 col-md-2">
-                                            <a class="thumbnail">
-                                                <img src="{$v.more.thumbnail|cmf_get_image_url}" alt="">
-                                            </a>
-                                            <div class="center">
-                                                <a href="{:cmf_url('car/element/index',['id'=>$v.id,'cid'=>$v.brand_id])}">
-                                                    {$v.element_title}
-                                                </a>
+
+                                            <img src="{$v.more.thumbnail|cmf_get_image_url}" alt=""
+                                                 class="my-thumb-img img-responsive">
+
+                                            <div class="input-group">
+
+                                                    <a href="{:cmf_url('car/element/index',['id'=>$v.id])}">
+                                                        {$v.element_title}
+
+                                                    </a>
+                                                    <h7 class="text-warning">{$v.element_sell_price}万</h7>
+
                                             </div>
                                         </div>
 
@@ -179,16 +185,16 @@
     </widget>
     <!--最新发布-->
     <widget name="newest_car">
-        <div class="met-index-about met-index-body" id="newest_car">
-            <div class="title">
-                <h2 class="">
-                    {$widget.title}
-                </h2>
-                <div class="home-line">
-                </div>
-                <p class="desc">
-                </p>
+        <div class="container" id="newest_car">
+
+            <h3>
+                {$widget.title}
+            </h3>
+            <div class="home-line">
             </div>
+            <p class="desc">
+            </p>
+
             <div class="container">
                 <div class="about-list">
                     <ul id="myTab" class="nav nav-tabs">
@@ -214,12 +220,15 @@
 
                                         <div class="col-sm-4 col-md-2">
                                             <a class="thumbnail">
-                                                <img src="{$v.more.thumbnail|cmf_get_image_url}" alt="">
+                                                <img src="{$v.more.thumbnail|cmf_get_image_url}" alt=""
+                                                     class="my-thumb-img img-responsive" >
                                             </a>
-                                            <div class="center">
-                                                <a href="{:cmf_url('car/Element/index',array('id'=>$v.id))}" target="_blank">
+                                            <div class="input-group">
+                                                <a href="{:cmf_url('car/Element/index',array('id'=>$v.id))}"
+                                                   target="_blank">
                                                     {$v.element_title}
                                                 </a>
+                                                <h7 class="text-warning">{$v.element_sell_price}万</h7>
                                             </div>
                                         </div>
 
@@ -329,6 +338,7 @@
             preload: 'visible'
         });
         $("#home-slider").show();
+
     });
 </script>
 <hook name="before_body_end"/>

@@ -65,7 +65,14 @@
 		})(jQuery); 
 		
 		$("#backtotop").totop();
-		
+        $('.my-thumb-img').jqthumb({
+            width  : 150,
+            height : 150,
+            show   : false, // By default the image would be shown immediately after processing. To disable, set it to false
+            after  : function(croppedImg){ // This callback returns an object
+                $(croppedImg).fadeIn(); // This would fade in the cropped image
+            }
+        });
 		
 	});
 	</script>
