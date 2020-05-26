@@ -1,7 +1,0 @@
-{
-	"name": "产品搜索页面",
-	"action": "car/search/index",
-	"description": "搜索模板文件",
-	"order": 10.0,
-	"more": {}
-}

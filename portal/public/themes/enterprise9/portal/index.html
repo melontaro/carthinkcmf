@@ -51,7 +51,24 @@
     </style>
     <hook name="before_head_end"/>
 </head>
-<body class="body-white">
+<body>
+
+<widget name="tab_header">
+    <div class="tab-header">
+        <div class="inner">
+            <div class="pull-right">
+                <php>
+                    $features = $widget['vars']['features'];
+                </php>
+
+                <foreach name="features" item="vo">
+                    <p href="" class="fa fa-{$vo.icon}"> {$vo.title}</p>
+                </foreach>
+            </div>
+        </div>
+    </div>
+</widget>
+
 <include file="public@nav"/>
 <div class="container">
     <div class="container">
@@ -64,7 +81,8 @@
                     <div class="caption-wraper">
                         <div class="caption">{$vo.title|default=''}</div>
                     </div>
-                    <a href="{$vo.url|default=''}"><img src="{:cmf_get_image_url($vo.image)}" alt="" class="img-responsive"></a>
+                    <a href="{$vo.url|default=''}"><img src="{:cmf_get_image_url($vo.image)}" alt=""
+                                                        class="img-responsive"></a>
                 </li>
             </slides>
             <noslides id="$top_slide_id">
@@ -164,11 +182,11 @@
 
                                             <div class="input-group">
 
-                                                    <a href="{:cmf_url('car/element/index',['id'=>$v.id])}">
-                                                        {$v.element_title}
+                                                <a href="{:cmf_url('car/element/index',['id'=>$v.id])}">
+                                                    {$v.element_title}
 
-                                                    </a>
-                                                    <h7 class="text-warning">{$v.element_sell_price}万</h7>
+                                                </a>
+                                                <h7 class="text-warning">{$v.element_sell_price}万</h7>
 
                                             </div>
                                         </div>
@@ -221,7 +239,7 @@
                                         <div class="col-sm-4 col-md-2">
                                             <a class="thumbnail">
                                                 <img src="{$v.more.thumbnail|cmf_get_image_url}" alt=""
-                                                     class="my-thumb-img img-responsive" >
+                                                     class="my-thumb-img img-responsive">
                                             </a>
                                             <div class="input-group">
                                                 <a href="{:cmf_url('car/Element/index',array('id'=>$v.id))}"

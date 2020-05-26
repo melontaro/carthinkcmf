@@ -1,44 +1,50 @@
 @CHARSET "UTF-8";
 body {
-    padding-top: 70px;
     background: #f0f0f0;
 }
-
-body.body-white {
-    background: #fff;
+a{
+    color: black;
 }
+/* 顶部tab */
+.tab-header {
+    background-color: #F8F8F8;
+    line-height: 35px;
+    height: 35px;
+}
+.tab-header .pull-right{
+    margin-right: 100px;
+}
+.tab-header p {
 
-.navbar-fixed-top, .navbar-fixed-bottom {
-    position: fixed;
+    margin-left: 30px;
+
+    text-decoration: none;
 }
 .navbar{
-    margin-bottom: 0px;
     background-color: #ff7112;
 }
-.navbar-default .navbar-brand {
+.navbar a {
+    color: #666;
+    margin-left: 30px;
+    text-decoration: none;
+}
+.navbar-default .navbar-brand,.navbar-default .navbar-brand:hover{
     color: #ffffff;
-}
-.navbar-fixed-top, .navbar-fixed-bottom, .navbar-static-top {
-    margin-right: 0px;
-    margin-left: 0px;
-}
-
-.navbar .nav .user {
-    padding: 0;
-    line-height: 70px;
-}
-
-.navbar .nav .user .headicon {
-    margin: 0 5px;
-    height: 30px;
-}
-
-.navbar .nav .user .caret {
-    vertical-align: middle;
-    margin: 0 5px;
+    font-weight:bold;
 }
 .navbar-default .navbar-nav>li>a {
     color: #ffffff;
+    font-weight:bold;
+
+}
+.navbar-default .navbar-nav>li>a:hover {
+    color: #ffffff;
+}
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+    color: #ffffff;
+    background-color: rgba(0,0,0,0.05);
+    font-weight:bold;
+
 }
 /*tc widget*/
 .tc-main {
@@ -658,11 +664,3 @@ ul.tc-photos {
     border-bottom-left-radius:0;
 }
 
-.nav-tabs .nav-link.active {
-    font-weight:bold;
-    background-color: transparent;
-    border-bottom:3px solid #dd0000;
-    border-right: none;
-    border-left: none;
-    border-top: none;
-}
