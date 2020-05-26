@@ -54,19 +54,22 @@
 <body>
 
 <widget name="tab_header">
-    <div class="tab-header">
-        <div class="inner">
-            <div class="pull-right">
-                <php>
-                    $features = $widget['vars']['features'];
-                </php>
+    <div class="container">
+        <div class="tab-header">
+            <div class="inner">
+                <div class="pull-right">
+                    <php>
+                        $features = $widget['vars']['features'];
+                    </php>
 
-                <foreach name="features" item="vo">
-                    <p href="" class="fa fa-{$vo.icon}"> {$vo.title}</p>
-                </foreach>
+                    <foreach name="features" item="vo">
+                        <p href="" class="fa fa-{$vo.icon}"> {$vo.title}</p>
+                    </foreach>
+                </div>
             </div>
         </div>
     </div>
+
 </widget>
 
 <include file="public@nav"/>

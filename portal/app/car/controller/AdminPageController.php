@@ -175,7 +175,7 @@ class AdminPageController extends AdminBaseController
      *     'param'  => ''
      * )
      */
-    public function editElement()
+    public function editPost()
     {
         $data = $this->request->param();
 

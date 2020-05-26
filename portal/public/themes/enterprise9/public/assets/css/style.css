@@ -7,12 +7,9 @@ a{
 }
 /* 顶部tab */
 .tab-header {
-    background-color: #F8F8F8;
+
     line-height: 35px;
     height: 35px;
-}
-.tab-header .pull-right{
-    margin-right: 100px;
 }
 .tab-header p {
 

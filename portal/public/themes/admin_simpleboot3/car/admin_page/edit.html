@@ -40,45 +40,45 @@
                     <tr>
                         <th width="100">标题<span class="form-required">*</span></th>
                         <td>
-                            <input type="hidden" name="post[id]" value="{$post.id}">
-                            <input class="form-control" type="text" style="width: 400px;" name="post[post_title]"
+                            <input type="hidden" name="element[id]" value="{$element.id}">
+                            <input class="form-control" type="text" style="width: 400px;" name="element[element_title]"
                                    required
-                                   value="{$post.post_title}" placeholder="请输入标题"/>
+                                   value="{$element.element_title}" placeholder="请输入标题"/>
                         </td>
                     </tr>
                     <tr>
                         <th width="100">别名</th>
                         <td>
-                            <input class="form-control" type="text" style="width: 400px;" name="post[post_alias]"
-                                   value="{$post.post_alias}" placeholder="请输入别名"/>
+                            <input class="form-control" type="text" style="width: 400px;" name="element[element_alias]"
+                                   value="{$element.element_alias}" placeholder="请输入别名"/>
                             <p class="help-block">用于美化url链接</p>
                         </td>
                     </tr>
                     <tr>
                         <th>关键词</th>
                         <td>
-                            <input class="form-control" type="text" name="post[post_keywords]" style="width:400px"
-                                   value="{$post['post_keywords']}" placeholder="请输入关键字">
+                            <input class="form-control" type="text" name="element[element_keywords]" style="width:400px"
+                                   value="{$element['element_keywords']}" placeholder="请输入关键字">
                             <p class="help-block">多关键词之间用空格隔开</p>
                         </td>
                     </tr>
                     <tr>
                         <th>摘要</th>
-                        <td><textarea class="form-control" name="post[post_excerpt]" style="height: 50px;">{$post.post_excerpt}</textarea>
+                        <td><textarea class="form-control" name="element[element_excerpt]" style="height: 50px;">{$element.element_excerpt}</textarea>
                         </td>
                     </tr>
                     <tr>
                         <th>内容</th>
                         <td>
-                            <script type="text/plain" id="content" name="post[post_content]">{$post.post_content}</script>
+                            <script type="text/plain" id="content" name="element[element_content]">{$element.element_content}</script>
                         </td>
                     </tr>
                     <tr>
                         <th>相册</th>
                         <td>
                             <ul id="photos" class="pic-list list-unstyled form-inline">
-                                <notempty name="post.more.photos">
-                                    <foreach name="post.more.photos" item="vo">
+                                <notempty name="element.more.photos">
+                                    <foreach name="element.more.photos" item="vo">
                                         <php>$img_url=cmf_get_image_preview_url($vo['url']);</php>
                                         <li id="saved-image{$key}">
                                             <input id="photo-{$key}" type="hidden" name="photo_urls[]"
@@ -104,8 +104,8 @@
                         <th>附件</th>
                         <td>
                             <ul id="files" class="pic-list list-unstyled form-inline">
-                                <notempty name="post.more.files">
-                                    <foreach name="post.more.files" item="vo">
+                                <notempty name="element.more.files">
+                                    <foreach name="element.more.files" item="vo">
                                         <php>$file_url=cmf_get_file_download_url($vo['url']);</php>
                                         <li id="saved-file{$key}">
                                             <input id="file-{$key}" type="hidden" name="file_urls[]"
@@ -141,15 +141,15 @@
                     <tr>
                         <td>
                             <div style="text-align: center;">
-                                <input type='hidden' name='post[more][thumbnail]' id='thumbnail'
-                                       value="{$post.more.thumbnail|default=''}">
+                                <input type='hidden' name='element[more][thumbnail]' id='thumbnail'
+                                       value="{$element.more.thumbnail|default=''}">
                                 <a href="javascript:uploadOneImage('图片上传','#thumbnail');">
-                                    <if condition="empty($post['more']['thumbnail'])">
+                                    <if condition="empty($element['more']['thumbnail'])">
                                         <img src="__TMPL__/public/assets/images/default-thumbnail.png"
                                              id='thumbnail-preview'
                                              width='135' height='135' style='cursor: pointer'/>
                                         <else/>
-                                        <img src="{:cmf_get_image_preview_url($post['more']['thumbnail'])}"
+                                        <img src="{:cmf_get_image_preview_url($element['more']['thumbnail'])}"
                                              id='thumbnail-preview'
                                              width='135' height='135' style='cursor: hand'/>
                                     </if>
@@ -164,20 +164,20 @@
                         <th>发布时间</th>
                     </tr>
                     <tr>
-                        <td><input class="form-control js-bootstrap-datetime" type="text" name="post[published_time]"
-                                   value="{:date('Y-m-d H:i',$post['published_time'])}"></td>
+                        <td><input class="form-control js-bootstrap-datetime" type="text" name="element[published_time]"
+                                   value="{:date('Y-m-d H:i',$element['published_time'])}"></td>
                     </tr>
                     <tr>
                         <th>状态</th>
                         <php>
-                            $status_yes=$post['post_status']==1?"checked":"";
+                            $status_yes=$element['element_status']==1?"checked":"";
                         </php>
                     </tr>
                     <tr>
                         <td>
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" name="post[post_status]" value="1" {$status_yes}>发布
+                                    <input type="checkbox" name="element[element_status]" value="1" {$status_yes}>发布
                                 </label>
                             </div>
                         </td>
@@ -187,7 +187,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <select class="form-control" name="post[more][template]" id="more-template-select">
+                            <select class="form-control" name="element[more][template]" id="more-template-select">
                                 <option value="">请选择模板</option>
                                 <foreach name="page_theme_files" item="vo">
                                     <php>$value=preg_replace('/^car\//','',$vo['file']);</php>
@@ -218,7 +218,7 @@
         } catch (err) {
         }
 
-        $('#more-template-select').val("{$post.more.template|default=''}");
+        $('#more-template-select').val("{$element.more.template|default=''}");
     });
 </script>
 </body>

@@ -39,7 +39,7 @@
                     <tr>
                         <th width="100">标题<span class="form-required">*</span></th>
                         <td>
-                            <input class="form-control" type="text" style="width: 400px;" name="post[post_title]"
+                            <input class="form-control" type="text" style="width: 400px;" name="element[element_title]"
                                    required
                                    placeholder="请输入标题"/>
                         </td>
@@ -47,20 +47,20 @@
                     <tr>
                         <th>关键词</th>
                         <td>
-                            <input class="form-control" type="text" name="post[post_keywords]" style="width:400px"
+                            <input class="form-control" type="text" name="element[element_keywords]" style="width:400px"
                                    placeholder="请输入关键字">
                             <p class="help-block">多关键词之间用空格隔开</p>
                         </td>
                     </tr>
                     <tr>
                         <th>摘要</th>
-                        <td><textarea class="form-control" name="post[post_excerpt]" style="height: 50px;"></textarea>
+                        <td><textarea class="form-control" name="element[element_excerpt]" style="height: 50px;"></textarea>
                         </td>
                     </tr>
                     <tr>
                         <th>内容</th>
                         <td>
-                            <script type="text/plain" id="content" name="post[post_content]"></script>
+                            <script type="text/plain" id="content" name="element[element_content]"></script>
                         </td>
                     </tr>
                     <tr>
@@ -98,7 +98,7 @@
                     <tr>
                         <td>
                             <div style="text-align: center;">
-                                <input type='hidden' name='post[more][thumbnail]' id='thumbnail'>
+                                <input type='hidden' name='element[more][thumbnail]' id='thumbnail'>
                                 <a href="javascript:uploadOneImage('图片上传','#thumbnail');">
                                     <img src="__TMPL__/public/assets/images/default-thumbnail.png"
                                          id='thumbnail-preview'
@@ -114,7 +114,7 @@
                         <th>发布时间</th>
                     </tr>
                     <tr>
-                        <td><input class="form-control js-bootstrap-datetime" type="text" name="post[published_time]"
+                        <td><input class="form-control js-bootstrap-datetime" type="text" name="element[published_time]"
                                    value="{:date('Y-m-d H:i',time())}"></td>
                     </tr>
                     <tr>
@@ -123,7 +123,7 @@
                     <tr>
                         <td>
                             <div class="checkbox">
-                                <label><input type="checkbox" name="post[post_status]" value="1" checked>发布</label>
+                                <label><input type="checkbox" name="element[element_status]" value="1" checked>发布</label>
                             </div>
                         </td>
                     </tr>
@@ -132,7 +132,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <select class="form-control" name="post[more][template]" id="more-template-select">
+                            <select class="form-control" name="element[more][template]" id="more-template-select">
                                 <option value="">请选择模板</option>
                                 <foreach name="page_theme_files" item="vo">
                                     <php>$value=preg_replace('/^car\//','',$vo['file']);</php>

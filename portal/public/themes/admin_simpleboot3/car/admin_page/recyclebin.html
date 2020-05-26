@@ -29,14 +29,14 @@
 						<th width="120">{:L('ACTIONS')}</th>
 					</tr>
 				</thead>
-				<foreach name="posts" item="vo">
+				<foreach name="elements" item="vo">
 				<tr>
 					<td><input type="checkbox" class="js-check" data-yid="js-check-y" data-xid="js-check-x" name="ids[]" value="{$vo.id}"></td>
 					<td><a>{$vo.id}</a></td>
-					<td><span>{$vo.post_title}</span></td>
+					<td><span>{$vo.element_title}</span></td>
 					<!-- <td>0</td> -->
-					<td>{$users[$vo['post_author']]['user_login']}</td>
-					<td>{$vo.post_date}</td>
+					<td>{$users[$vo['element_author']]['user_login']}</td>
+					<td>{$vo.element_date}</td>
 					<td>
 						<a href="{:U('AdminPage/restore',array('id'=>$vo['id']))}" class="js-ajax-dialog-btn" data-msg="确定还原吗？">还原</a>| 
 						<a href="{:U('AdminPage/clean',array('id'=>$vo['id']))}" class="js-ajax-delete">{:L('DELETE')}</a>

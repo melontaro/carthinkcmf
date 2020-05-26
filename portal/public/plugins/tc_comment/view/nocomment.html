@@ -1,0 +1,23 @@
+<br><h3>评论</h3>
+<div class="comment-area" id="comments">
+<hr>
+<div class="post" id="divCommentPost">乖，登录后才可以留言！</div>
+<hr>
+    <div class="comments">
+    <foreach name="comments" item="vo">
+	<div class="comment" data-id="{$vo.id}" data-uid="{$vo.user_id}" data-username="{$vo.full_name}" id="comment{$vo.id}">
+		  <a class="pull-left" href="{$vo.url}">
+              <if condition="empty($vo.avatar)"><img src="/plugins/tc_comment/images/headicon.png" class="media-object avatar" /><else /><img src="__ROOT__/upload/{$vo.avatar}" class="media-object avatar"/></if>
+		  </a>
+		  <div class="comment-body">
+		    <div class="comment-content"><a href="{$vo.url}">{$vo.full_name}</a>:<br><span>{$vo.content}</span></div>
+		    <div><span class="time">{:date('Y-m-d H:i',$vo.create_time)}</span></div>
+		  </div>
+		  <div class="clearfix"></div>
+    </div>
+    </foreach>
+        <ul class="pagination">
+        {$page}
+        </ul>
+    </div>
+</div>

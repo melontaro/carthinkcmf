@@ -1,6 +1,6 @@
 {
     "name": "联系我们页",
-    "action": "car/Page/index",
+    "action": "car/Contact/index",
     "description": "联系我们页模板文件",
     "order": 10.0,
     "more": {
