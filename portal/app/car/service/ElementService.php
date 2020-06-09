@@ -48,7 +48,7 @@ class ElementService
     {
 
         $join = [
-            ['__USER__ u', 'a.user_id = u.id']
+           ['__USER__ u', 'a.user_id = u.id']
         ];
 
         $field = 'a.*,u.user_login,u.user_nickname,u.user_email';

@@ -120,7 +120,7 @@ class AdminElementController extends AdminBaseController
             $data = $this->request->param();
 
             //状态只能设置默认值。未发布、未置顶、未推荐
-            $data['element']['element_status'] = 0;
+            $data['element']['element_status'] = 1;
             $data['element']['is_top']      = 0;
             $data['element']['recommended'] = 0;
 
